@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.ListShiftTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListShiftEmpty}" rendered="#{shiftController.itemCount == 0}"/>
+                <h:panelGroup rendered="#{shiftController.itemCount > 0}">
+                    <h:dataTable value="#{shiftController.shiftItems}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_location}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.location.locationName}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_description}"/>
+                            </f:facet>
+                             <h:outputText value="#{item.location.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startTime}">
+                                <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endTime}">
+                                <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                             <h:outputText value=" "/>
+                             <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.ListShiftViewButton}">
+                                <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][shiftController.converter].jsfcrud_invoke}"/>
+                            </h:commandButton>
+                            <h:outputText value=" "/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandButton action="#{shiftController.createSetup}" value="#{bundle.ListShiftCreateButton}"/>
+                <br />
+                <br />
+                <h:commandButton value="#{bundle.ListShiftIndexButton}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

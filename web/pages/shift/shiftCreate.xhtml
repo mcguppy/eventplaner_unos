@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.CreateShiftTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateShiftLabel_location}" for="location" />
+                    <h:outputText value="#{shiftController.shift.location.locationName}" title="#{bundle.CreateShiftTitle_location}"/>
+                    <h:outputText value="#{bundle.CreateShiftLabel_description}"/>
+                    <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.CreateShiftTitle_description}"/>
+                    <h:outputLabel value="#{bundle.CreateShiftLabel_startTime}" for="startTime" />
+                    <h:inputText id="startTime" value="#{shiftController.shift.startTime}" title="#{bundle.CreateShiftTitle_startTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_startTime}">
+                        <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateShiftLabel_endTime}" for="endTime" />
+                    <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.CreateShiftTitle_endTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_endTime}">
+                        <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                    </h:inputText>
+                </h:panelGrid>
+                <br />
+                <h:commandButton action="#{shiftController.create}" value="#{bundle.CreateShiftSaveButton}" />
+                <h:outputText value=" "/>
+                <h:commandButton action="locationDetail" value="#{bundle.CreateShiftBackButton}" immediate="true"/>
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

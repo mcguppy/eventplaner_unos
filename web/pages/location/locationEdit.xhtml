@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.EditLocationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLocationLabel_locationName}" for="locationName" />
+                    <h:inputText id="locationName" value="#{locationController.location.locationName}" title="#{bundle.EditLocationTitle_locationName}" required="true" requiredMessage="#{bundle.EditLocationRequiredMessage_locationName}"/>
+                    <h:outputLabel value="#{bundle.EditLocationLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{locationController.location.description}" title="#{bundle.EditLocationTitle_description}" />
+                </h:panelGrid>
+                <h:commandButton action="#{locationController.edit}" value="#{bundle.EditLocationSaveButton}">
+                    <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
+                </h:commandButton>
+                <h:outputText value=" "/>
+                <h:commandButton action="locationDetail" value="#{bundle.EditLocationBackButton}" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

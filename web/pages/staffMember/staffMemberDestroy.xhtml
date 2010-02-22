@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.DestroyStaffMemberTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green"  warnStyle="color: orange" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_title}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.title}" title="#{bundle.DestroyStaffMemberTitle_title}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_firstName}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.firstName}" title="#{bundle.DestroyStaffMemberTitle_firstName}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_lastName}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.lastName}" title="#{bundle.DestroyStaffMemberTitle_lastName}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_street}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.street}" title="#{bundle.DestroyStaffMemberTitle_street}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_zip}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.zip}" title="#{bundle.DestroyStaffMemberTitle_zip}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_city}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.city}" title="#{bundle.DestroyStaffMemberTitle_city}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_mailAddress}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.mailAddress}" title="#{bundle.DestroyStaffMemberTitle_mailAddress}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_phoneNr}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.DestroyStaffMemberTitle_phoneNr}"/>
+                    <h:outputText value="#{bundle.DestroyStaffMemberLabel_cellPhoneNr}"/>
+                    <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.DestroyStaffMemberTitle_cellPhoneNr}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandButton action="#{staffMemberController.destroy}" value="#{bundle.DestroyStaffMemberDestroyButton}">
+                    <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
+                </h:commandButton>
+                <h:outputText value=" "/>
+                <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.DestroyStaffMemberBackButton}" >
+                    <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
+                </h:commandButton>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

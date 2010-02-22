@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.EditShiftTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditShiftLabel_location}" for="location" />
+                    <h:outputText value="#{shiftController.shift.location.locationName}" title="#{bundle.EditShiftTitle_location}"/>
+                    <h:outputText value="#{bundle.EditShiftLabel_description}"/>
+                    <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.EditShiftTitle_description}"/>
+                    <h:outputLabel value="#{bundle.EditShiftLabel_startTime}" for="startTime" />
+                    <h:inputText id="startTime" value="#{shiftController.shift.startTime}" title="#{bundle.EditShiftTitle_startTime}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_startTime}">
+                        <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditShiftLabel_endTime}" for="endTime" />
+                    <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.EditShiftTitle_endTime}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_endTime}">
+                        <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                    </h:inputText>
+                    <h:outputText value="&nbsp;"/>
+                    <h:outputText value="&nbsp;"/>
+                    <h:outputText value="#{bundle.EditShiftLabel_staffMembers}"/>
+                    <h:panelGroup>
+                        <h:selectManyCheckbox id="staffMemberCollection" value="#{shiftController.shift.jsfcrud_transform[jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method.collectionToArray][jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method.arrayToCollection].staffMembers}" title="StaffMemberCollection" layout="pageDirection" converter="#{staffMemberController.converter}" >
+                            <f:selectItems value="#{staffMemberController.staffMemberItemsAvailableSelectMany}"/>
+                        </h:selectManyCheckbox>
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:commandButton action="#{shiftController.edit}" value="#{bundle.EditShiftSaveButton}">
+                    <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
+                </h:commandButton>
+                <h:outputText value=" "/>
+                <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.EditShiftBackButton}" >
+                    <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
+                </h:commandButton>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
