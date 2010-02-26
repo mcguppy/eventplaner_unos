@@ -9,78 +9,77 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.ViewStaffMemberTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="body">
+        <ui:define name="navigation">
+            <h:commandButton action="#{staffMemberController.editSetup}" value="#{bundle.ViewStaffMemberEditButton}" >
+                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.destroySetup}" value="#{bundle.ViewStaffMemberDestroyButton}">
+                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.ViewStaffMemberShowAllButton}"/>
+        </ui:define>
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_title}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.title}" title="#{bundle.ViewStaffMemberTitle_title}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_firstName}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.firstName}" title="#{bundle.ViewStaffMemberTitle_firstName}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_lastName}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.lastName}" title="#{bundle.ViewStaffMemberTitle_lastName}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_street}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.street}" title="#{bundle.ViewStaffMemberTitle_street}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_zip}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.zip}" title="#{bundle.ViewStaffMemberTitle_zip}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_city}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.city}" title="#{bundle.ViewStaffMemberTitle_city}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_mailAddress}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.mailAddress}" title="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_phoneNr}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_cellPhoneNr}"/>
-                    <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
-                    <h:outputText value="&nbsp;"/>
-                    <h:outputText value="&nbsp;"/>
-                    <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>
-                    <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{staffMemberController.staffMember.shiftsSize == 0}"/>
-                    <h:panelGroup rendered="#{staffMemberController.staffMember.shiftsSize > 0}">
-                        <h:dataTable value="#{staffMemberController.staffMember.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListShiftTitle_location}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.location.locationName}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListShiftTitle_description}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.location.description}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.startTime}">
-                                    <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.endTime}">
-                                    <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
-                                </h:outputText>
-                            </h:column>
-                        </h:dataTable>
-                    </h:panelGroup>
-                </h:panelGrid>
-                <br />
-                <h:commandButton action="#{staffMemberController.editSetup}" value="#{bundle.ViewStaffMemberEditButton}" >
-                    <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
-                </h:commandButton>
-                <h:outputText value=" "/>
-                <h:commandButton action="#{staffMemberController.destroySetup}" value="#{bundle.ViewStaffMemberDestroyButton}">
-                    <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
-                </h:commandButton>
-                <h:outputText value=" "/>
-                <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.ViewStaffMemberShowAllButton}"/>
-            </h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_title}"/>
+                <h:outputText value="#{staffMemberController.staffMember.title}" title="#{bundle.ViewStaffMemberTitle_title}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_firstName}"/>
+                <h:outputText value="#{staffMemberController.staffMember.firstName}" title="#{bundle.ViewStaffMemberTitle_firstName}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_lastName}"/>
+                <h:outputText value="#{staffMemberController.staffMember.lastName}" title="#{bundle.ViewStaffMemberTitle_lastName}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_street}"/>
+                <h:outputText value="#{staffMemberController.staffMember.street}" title="#{bundle.ViewStaffMemberTitle_street}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_zip}"/>
+                <h:outputText value="#{staffMemberController.staffMember.zip}" title="#{bundle.ViewStaffMemberTitle_zip}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_city}"/>
+                <h:outputText value="#{staffMemberController.staffMember.city}" title="#{bundle.ViewStaffMemberTitle_city}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_mailAddress}"/>
+                <h:outputText value="#{staffMemberController.staffMember.mailAddress}" title="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_phoneNr}"/>
+                <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_cellPhoneNr}"/>
+                <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>
+                <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{staffMemberController.staffMember.shiftsSize == 0}"/>
+                <h:panelGroup rendered="#{staffMemberController.staffMember.shiftsSize > 0}">
+                    <h:dataTable value="#{staffMemberController.staffMember.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_location}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.location.locationName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.location.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startTime}">
+                                <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endTime}">
+                                <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
         </ui:define>
     </ui:composition>
 
