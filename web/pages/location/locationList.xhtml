@@ -15,39 +15,36 @@
             <h:commandButton action="#{locationController.createSetup}" value="#{bundle.ListLocationCreateButton}"/>
         </ui:define>
         <ui:define name="content">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListLocationEmpty}" rendered="#{locationController.itemCount == 0}"/>
-                <h:panelGroup rendered="#{locationController.itemCount > 0}">
-                    <h:dataTable value="#{locationController.locationItems}" var="item" border="0" cellpadding="2" cellspacing="0" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLocationTitle_locationName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.locationName}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLocationTitle_description}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:outputText value=" "/>
-                            <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ListLocationViewButton}">
-                                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][locationController.converter].jsfcrud_invoke}"/>
-                            </h:commandButton>
-                            <h:outputText value=" "/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-            </h:form>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListLocationEmpty}" rendered="#{locationController.itemCount == 0}"/>
+            <h:panelGroup rendered="#{locationController.itemCount > 0}">
+                <h:dataTable value="#{locationController.locationItems}" var="item" border="0" cellpadding="2" cellspacing="0" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListLocationTitle_locationName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.locationName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListLocationTitle_description}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:outputText value=" "/>
+                        <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ListLocationViewButton}">
+                            <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][locationController.converter].jsfcrud_invoke}"/>
+                        </h:commandButton>
+                        <h:outputText value=" "/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
         </ui:define>
     </ui:composition>
-
 </html>

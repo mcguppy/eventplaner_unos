@@ -18,14 +18,12 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateLocationLabel_locationName}" for="locationName" />
-                    <h:inputText id="locationName" value="#{locationController.location.locationName}" title="#{bundle.CreateLocationTitle_locationName}" required="true" requiredMessage="#{bundle.CreateLocationRequiredMessage_locationName}"/>
-                    <h:outputLabel value="#{bundle.CreateLocationLabel_description}" for="description" />
-                    <h:inputText id="description" value="#{locationController.location.description}" title="#{bundle.CreateLocationTitle_description}" />
-                </h:panelGrid>
-            </h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateLocationLabel_locationName}" for="locationName" />
+                <h:inputText id="locationName" value="#{locationController.location.locationName}" title="#{bundle.CreateLocationTitle_locationName}" required="true" requiredMessage="#{bundle.CreateLocationRequiredMessage_locationName}"/>
+                <h:outputLabel value="#{bundle.CreateLocationLabel_description}" for="description" />
+                <h:inputText id="description" value="#{locationController.location.description}" title="#{bundle.CreateLocationTitle_description}" />
+            </h:panelGrid>
         </ui:define>
     </ui:composition>
 

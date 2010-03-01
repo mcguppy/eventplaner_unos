@@ -22,38 +22,36 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green"  warnStyle="color: orange" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewLocationLabel_locationName}"/>
-                    <h:outputText value="#{locationController.location.locationName}" title="#{bundle.ViewLocationTitle_locationName}"/>
-                    <h:outputText value="#{bundle.ViewLocationLabel_description}"/>
-                    <h:outputText value="#{locationController.location.description}" title="#{bundle.ViewLocationTitle_description}"/>
-                    <h:outputText value="&nbsp;"/>
-                    <h:outputText value="&nbsp;"/>
-                    <h:outputText value="#{bundle.ViewLocationLabel_shifts}"/>
-                    <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{locationController.location.shiftsSize == 0}"/>
-                    <h:panelGroup rendered="#{locationController.location.shiftsSize > 0}">
-                        <h:dataTable value="#{locationController.location.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.startTime}">
-                                    <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.endTime}">
-                                    <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
-                                </h:outputText>
-                            </h:column>
-                        </h:dataTable>
-                    </h:panelGroup>
-                </h:panelGrid>
-            </h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewLocationLabel_locationName}"/>
+                <h:outputText value="#{locationController.location.locationName}" title="#{bundle.ViewLocationTitle_locationName}"/>
+                <h:outputText value="#{bundle.ViewLocationLabel_description}"/>
+                <h:outputText value="#{locationController.location.description}" title="#{bundle.ViewLocationTitle_description}"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.ViewLocationLabel_shifts}"/>
+                <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{locationController.location.shiftsSize == 0}"/>
+                <h:panelGroup rendered="#{locationController.location.shiftsSize > 0}">
+                    <h:dataTable value="#{locationController.location.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startTime}">
+                                <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endTime}">
+                                <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
         </ui:define>
     </ui:composition>
 
