@@ -29,7 +29,6 @@ table.jsfcrud_list th {
     border-style: solid;
     border-width: 1px;
     border-color: #898989;
-    letter-spacing: 3px;
     text-align: left;
     padding: 6px;
     background-color: #c5c5c5;
@@ -69,7 +68,7 @@ tr.jsfcrud_even_row {
 
 #container {
     margin-top: 20px;
-    width: 850px;
+    width: 950px;
     margin-left: auto;
     margin-right: auto;
     background: #DDDDDD;

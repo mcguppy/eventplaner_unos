@@ -9,6 +9,11 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.CreateStaffMemberTitle}"></h:outputText>
         </ui:define>
+        <ui:define name="navigation">
+                <h:commandButton action="#{staffMemberController.create}" value="#{bundle.CreateStaffMemberSaveButton}" />
+                <h:outputText value=" "/>
+                <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.CreateStaffMemberShowAllButton}" immediate="true"/>
+        </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -36,11 +41,6 @@
                     <h:outputLabel value="#{bundle.CreateStaffMemberLabel_cellPhoneNr}" for="cellPhoneNr" />
                     <h:inputText id="cellPhoneNr" value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.CreateStaffMemberTitle_cellPhoneNr}" />
                 </h:panelGrid>
-                <br />
-                <h:commandButton action="#{staffMemberController.create}" value="#{bundle.CreateStaffMemberSaveButton}" />
-                <h:outputText value=" "/>
-                <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.CreateStaffMemberShowAllButton}" immediate="true"/>
-                <br />
             </h:form>
         </ui:define>
     </ui:composition>
