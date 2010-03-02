@@ -10,11 +10,13 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.EditLocationTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="locationDetail" value="#{bundle.EditLocationBackButton}" immediate="true"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{locationController.edit}" value="#{bundle.EditLocationSaveButton}">
                 <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
             </h:commandButton>
-            <h:outputText value=" "/>
-            <h:commandButton action="locationDetail" value="#{bundle.EditLocationBackButton}" immediate="true"/>
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">

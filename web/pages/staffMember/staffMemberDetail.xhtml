@@ -10,6 +10,10 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.ViewStaffMemberTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.ViewStaffMemberShowAllButton}"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{staffMemberController.editSetup}" value="#{bundle.ViewStaffMemberEditButton}" >
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
@@ -17,8 +21,6 @@
             <h:commandButton action="#{staffMemberController.destroySetup}" value="#{bundle.ViewStaffMemberDestroyButton}">
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.ViewStaffMemberShowAllButton}"/>
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">

@@ -10,9 +10,11 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.CreateLocationTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton action="#{locationController.create}" value="#{bundle.CreateLocationSaveButton}" />
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
             <h:commandButton action="locationList" value="#{bundle.CreateLocationBackButton}" immediate="true"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.create}" value="#{bundle.CreateLocationSaveButton}" />
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">

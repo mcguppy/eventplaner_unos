@@ -10,9 +10,11 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.CreateShiftTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton action="#{shiftController.create}" value="#{bundle.CreateShiftSaveButton}" />
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
             <h:commandButton action="locationDetail" value="#{bundle.CreateShiftBackButton}" immediate="true"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{shiftController.create}" value="#{bundle.CreateShiftSaveButton}" />
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">

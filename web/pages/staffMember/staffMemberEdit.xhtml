@@ -10,15 +10,17 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.EditStaffMemberTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.EditStaffMemberBackButton}" >
+                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+            <h:outputText value=" "/>
             <h:commandButton action="#{staffMemberController.edit}" value="#{bundle.EditStaffMemberSaveButton}">
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
             <h:outputText value=" "/>
             <h:commandButton action="#{staffMemberController.destroySetup}" value="#{bundle.EditStaffMemberDestroyButton}">
-                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
-            </h:commandButton>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.EditStaffMemberBackButton}" >
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
         </ui:define>

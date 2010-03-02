@@ -10,7 +10,7 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.ListLocationTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton value="#{bundle.ListLocationIndexButton}" action="index" immediate="true" />
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
             <h:commandButton action="#{locationController.createSetup}" value="#{bundle.ListLocationCreateButton}"/>
         </ui:define>

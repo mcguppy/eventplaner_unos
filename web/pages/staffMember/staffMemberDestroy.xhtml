@@ -10,11 +10,13 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.DestroyStaffMemberTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton action="#{staffMemberController.destroy}" value="#{bundle.DestroyStaffMemberDestroyButton}">
+            <h:commandButton value="#{bundle.IndexButton}" action="index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.DestroyStaffMemberBackButton}" >
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
             <h:outputText value=" "/>
-            <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.DestroyStaffMemberBackButton}" >
+            <h:commandButton action="#{staffMemberController.destroy}" value="#{bundle.DestroyStaffMemberDestroyButton}">
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
         </ui:define>

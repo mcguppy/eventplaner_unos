@@ -10,11 +10,13 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.EditShiftTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton action="#{shiftController.edit}" value="#{bundle.EditShiftSaveButton}">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.EditShiftBackButton}" >
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
             <h:outputText value=" "/>
-            <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.EditShiftBackButton}" >
+            <h:commandButton action="#{shiftController.edit}" value="#{bundle.EditShiftSaveButton}">
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
         </ui:define>

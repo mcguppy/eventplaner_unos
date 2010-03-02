@@ -10,11 +10,13 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.DestroyLocationTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton action="#{locationController.destroy}" value="#{bundle.DestroyLocationDestroyButton}">
-                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
-            </h:commandButton>
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
             <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.DestroyLocationBackButton}" >
+                <h:outputText value=" "/>
+                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+            <h:commandButton action="#{locationController.destroy}" value="#{bundle.DestroyLocationDestroyButton}">
                 <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
             </h:commandButton>
         </ui:define>

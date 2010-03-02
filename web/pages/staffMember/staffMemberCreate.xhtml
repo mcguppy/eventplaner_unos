@@ -10,9 +10,11 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.CreateStaffMemberTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
-            <h:commandButton action="#{staffMemberController.create}" value="#{bundle.CreateStaffMemberSaveButton}" />
+            <h:commandButton value="#{bundle.IndexButton}" action="index" immediate="true" />
             <h:outputText value=" "/>
             <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.CreateStaffMemberShowAllButton}" immediate="true"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.create}" value="#{bundle.CreateStaffMemberSaveButton}" />
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">

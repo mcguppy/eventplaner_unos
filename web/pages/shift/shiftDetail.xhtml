@@ -10,16 +10,18 @@
             <h:outputText value="#{bundle.ApplicationName} - #{bundle.ViewShiftTitle}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ViewShiftBackButton}" >
+                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}"/>
+            </h:commandButton>
+            <h:outputText value=" "/>
             <h:commandButton action="#{shiftController.editSetup}" value="#{bundle.ViewShiftEditButton}" >
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
             <h:outputText value=" "/>
             <h:commandButton action="#{shiftController.destroySetup}" value="#{bundle.ViewShiftDestroyButton}">
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}" />
-            </h:commandButton>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ViewShiftBackButton}" >
-                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
         </ui:define>
 
