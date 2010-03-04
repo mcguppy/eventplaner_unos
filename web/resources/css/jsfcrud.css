@@ -68,7 +68,7 @@ tr.jsfcrud_even_row {
 
 #container {
     margin-top: 20px;
-    width: 950px;
+    width: 840px;
     margin-left: auto;
     margin-right: auto;
     background: #DDDDDD;
@@ -85,14 +85,14 @@ tr.jsfcrud_even_row {
 }
 
 #content {
-    padding: 10px;
+    padding: 20px;
     text-align: left;
 }
 
 #navigation {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
     text-align: left;
 
 }

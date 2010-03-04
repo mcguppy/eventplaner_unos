@@ -50,7 +50,7 @@
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>
                 <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{staffMemberController.staffMember.shiftsSize == 0}"/>
                 <h:panelGroup rendered="#{staffMemberController.staffMember.shiftsSize > 0}">
-                    <h:dataTable value="#{staffMemberController.staffMember.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                    <h:dataTable value="#{staffMemberController.staffMember.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="600" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListShiftTitle_location}"/>
