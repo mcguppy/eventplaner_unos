@@ -47,7 +47,7 @@
                 <h:outputText value="#{bundle.ViewShiftLabel_staffMembers}"/>
                 <h:outputText escape="false" value="#{bundle.ViewStaffMemberEmpty}" rendered="#{shiftController.shift.staffMembersSize == 0}"/>
                 <h:panelGroup rendered="#{shiftController.shift.staffMembersSize > 0}">
-                    <h:dataTable value="#{shiftController.shift.staffMembers}" var="item" border="0" cellpadding="2" cellspacing="0" width="650" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                    <h:dataTable value="#{shiftController.shift.staffMembers}" var="item" border="0" cellpadding="2" cellspacing="0" width="750" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_title}"/>
