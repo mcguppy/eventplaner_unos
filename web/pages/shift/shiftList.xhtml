@@ -12,6 +12,8 @@
         <ui:define name="navigation">
             <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
+            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{shiftController.createSetup}" value="#{bundle.ListShiftCreateButton}"/>
         </ui:define>
         <ui:define name="content">

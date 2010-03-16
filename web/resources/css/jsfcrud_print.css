@@ -1,4 +1,8 @@
 
 #navigation {
-    visibility: hidden
+    visibility: hidden;
+}
+
+input {
+    visibility: hidden;
 }

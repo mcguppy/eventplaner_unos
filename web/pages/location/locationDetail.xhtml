@@ -14,6 +14,8 @@
             <h:outputText value=" "/>
             <h:commandButton action="#{locationController.listSetup}" value="#{bundle.ViewLocationShowAllButton}"/>
             <h:outputText value=" "/>
+            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{shiftController.createSetup}" value="#{bundle.ViewLocationCreateSchiftButton}" immediate="true">
                 <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
             </h:commandButton>

@@ -16,6 +16,8 @@
                 <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
             <h:outputText value=" "/>
+            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{shiftController.editSetup}" value="#{bundle.ViewShiftEditButton}" >
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
@@ -84,12 +86,12 @@
                             </f:facet>
                             <h:outputText value="#{item.city}"/>
                         </h:column>
-                       <!-- <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mailAddress}"/>
-                        </h:column>-->
+                        <!-- <h:column>
+                             <f:facet name="header">
+                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
+                             </f:facet>
+                             <h:outputText value="#{item.mailAddress}"/>
+                         </h:column>-->
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
