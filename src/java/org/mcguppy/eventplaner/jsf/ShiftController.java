@@ -15,6 +15,7 @@ import org.mcguppy.eventplaner.jpa.controllers.ShiftJpaController;
 import org.mcguppy.eventplaner.jpa.controllers.exceptions.NonexistentEntityException;
 import org.mcguppy.eventplaner.jpa.entities.Location;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
+import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember.Title;
 import org.mcguppy.eventplaner.jsf.util.JsfUtil;
 
@@ -50,6 +51,9 @@ public class ShiftController {
         }
         if (shift == null) {
             shift = new Shift();
+        }
+        if (null != shift.getStaffMembers() && shift.getStaffMembers().size() > 0) {
+            Collections.sort((List<StaffMember>) shift.getStaffMembers());
         }
         return shift;
     }

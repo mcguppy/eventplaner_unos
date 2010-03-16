@@ -76,6 +76,7 @@ tr.jsfcrud_even_row {
 
 #main_title {
     background: black;
+    padding-left: 20px;
 }
 #main_title h1 {
     margin: 0px;

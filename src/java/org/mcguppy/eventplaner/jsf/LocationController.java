@@ -14,6 +14,7 @@ import javax.faces.model.SelectItem;
 import org.mcguppy.eventplaner.jpa.controllers.LocationJpaController;
 import org.mcguppy.eventplaner.jpa.controllers.exceptions.NonexistentEntityException;
 import org.mcguppy.eventplaner.jpa.entities.Location;
+import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember.Title;
 import org.mcguppy.eventplaner.jsf.util.JsfUtil;
 
@@ -49,6 +50,9 @@ public class LocationController {
         }
         if (location == null) {
             location = new Location();
+        }
+        if (null != location.getShifts() && location.getShifts().size() > 0) {
+            Collections.sort((List<Shift>)location.getShifts());
         }
         return location;
     }

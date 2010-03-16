@@ -13,6 +13,7 @@ import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.controllers.exceptions.NonexistentEntityException;
+import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember.Title;
 import org.mcguppy.eventplaner.jsf.util.JsfUtil;
@@ -49,6 +50,9 @@ public class StaffMemberController {
         }
         if (staffMember == null) {
             staffMember = new StaffMember();
+        }
+        if (null != staffMember.getShifts() && staffMember.getShifts().size() > 0) {
+            Collections.sort((List<Shift>) staffMember.getShifts());
         }
         return staffMember;
     }
