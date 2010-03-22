@@ -27,12 +27,20 @@
                 <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.CreateShiftTitle_description}"/>
                 <h:outputLabel value="#{bundle.CreateShiftLabel_startTime}" for="startTime" />
                 <h:inputText id="startTime" value="#{shiftController.shift.startTime}" title="#{bundle.CreateShiftTitle_startTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_startTime}">
-                    <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:inputText>
                 <h:outputLabel value="#{bundle.CreateShiftLabel_endTime}" for="endTime" />
                 <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.CreateShiftTitle_endTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_endTime}">
-                    <f:convertDateTime pattern="#{bundle.DateTimePattern}" />
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:inputText>
+                 <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.CreateShiftLabel_staffMembers}"/>
+                <h:panelGroup>
+                    <h:selectManyCheckbox id="staffMemberCollection" value="#{shiftController.shift.jsfcrud_transform[jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method.collectionToArray][jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method.arrayToCollection].staffMembers}" title="StaffMemberCollection" layout="pageDirection" converter="#{staffMemberController.converter}" >
+                        <f:selectItems value="#{staffMemberController.staffMemberItemsAvailableSelectMany}"/>
+                    </h:selectManyCheckbox>
+                </h:panelGroup>
             </h:panelGrid>
         </ui:define>
     </ui:composition>
