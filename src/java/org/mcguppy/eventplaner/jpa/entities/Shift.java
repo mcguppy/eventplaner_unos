@@ -42,6 +42,8 @@ public class Shift implements Serializable, Comparable {
     private Location location;
     @ManyToMany(fetch = FetchType.LAZY)
     Collection<StaffMember> staffMembers;
+    @ManyToOne
+    private StaffMember responsible;
 
     public String getDescription() {
         return description;
@@ -93,6 +95,14 @@ public class Shift implements Serializable, Comparable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public StaffMember getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(StaffMember responsible) {
+        this.responsible = responsible;
     }
 
     @Override

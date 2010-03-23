@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,12 +19,13 @@ import javax.persistence.Table;
  * @author stefan meichtry
  */
 @Entity
-@Table(name="staffmember")
+@Table(name = "staffmember")
 public class StaffMember implements Serializable, Comparable {
 
     private static final long serialVersionUID = 1L;
 
     public enum Title {
+
         Herr,
         Frau;
     }
@@ -47,6 +49,8 @@ public class StaffMember implements Serializable, Comparable {
     private String mailAddress;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "staffMembers")
     private Collection<Shift> shifts;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible")
+    private Collection<Shift> responsibleShifts;
 
     public Long getId() {
         return id;
@@ -140,7 +144,13 @@ public class StaffMember implements Serializable, Comparable {
         this.shifts = shifts;
     }
 
+    public Collection<Shift> getResponsibleShifts() {
+        return responsibleShifts;
+    }
 
+    public void setResponsibleShifts(Collection<Shift> responsibleShifts) {
+        this.responsibleShifts = responsibleShifts;
+    }
 
     @Override
     public int hashCode() {
@@ -164,7 +174,7 @@ public class StaffMember implements Serializable, Comparable {
 
     @Override
     public String toString() {
-        return lastName + " " + firstName + " " +  city;
+        return lastName + " " + firstName + " " + city;
     }
 
     public int compareTo(Object o) {
