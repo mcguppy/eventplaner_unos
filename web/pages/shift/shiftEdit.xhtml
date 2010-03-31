@@ -16,7 +16,7 @@
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
             <h:outputText value=" "/>
-            <h:commandButton action="#{shiftController.edit}" value="#{bundle.EditShiftSaveButton}">
+            <h:commandButton action="#{shiftController.edit}" value="#{bundle.EditShiftSaveButton}" >
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
         </ui:define>
@@ -25,7 +25,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.EditShiftLabel_location}" for="location" />
+                <h:outputLabel value="#{bundle.EditShiftLabel_location}" />
                 <h:outputText value="#{shiftController.shift.location.locationName}" title="#{bundle.EditShiftTitle_location}"/>
                 <h:outputText value="#{bundle.EditShiftLabel_description}"/>
                 <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.EditShiftTitle_description}"/>
@@ -37,6 +37,14 @@
                 <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.EditShiftTitle_endTime}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_endTime}">
                     <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:inputText>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="Schicht-Verantwortlicher:"/>
+                <h:panelGroup>
+                    <h:selectOneMenu id="shiftResponsible" value="#{shiftController.shift.responsible}"  title="shiftResponsible" >
+                        <f:selectItems value="#{staffMemberController.staffMemberItemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGroup>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.EditShiftLabel_staffMembers}"/>

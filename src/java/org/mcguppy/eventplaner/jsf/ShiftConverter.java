@@ -13,6 +13,7 @@ import org.mcguppy.eventplaner.jpa.entities.Shift;
  */
 public class ShiftConverter implements Converter {
 
+    @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String string) {
         if (string == null || string.length() == 0) {
             return null;
@@ -22,6 +23,7 @@ public class ShiftConverter implements Converter {
         return controller.findShift(id);
     }
 
+    @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
         if (object == null) {
             return null;

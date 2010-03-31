@@ -47,13 +47,13 @@ public class StaffMemberJpaController {
             }
             staffMember.setShifts(attachedShiftCollection);
 
-            List<Shift> attachedResponsibleShiftCollection = new ArrayList<Shift>();
-            for (Shift responsibleShiftToAttach : staffMember.getResponsibleShifts()) {
-                responsibleShiftToAttach = em.getReference(responsibleShiftToAttach.getClass(), responsibleShiftToAttach.getId());
-                attachedResponsibleShiftCollection.add(responsibleShiftToAttach);
-            }
-
-            staffMember.setResponsibleShifts(attachedResponsibleShiftCollection);
+//            List<Shift> attachedResponsibleShiftCollection = new ArrayList<Shift>();
+//            for (Shift responsibleShiftToAttach : staffMember.getResponsibleShifts()) {
+//                responsibleShiftToAttach = em.getReference(responsibleShiftToAttach.getClass(), responsibleShiftToAttach.getId());
+//                attachedResponsibleShiftCollection.add(responsibleShiftToAttach);
+//            }
+//
+//            staffMember.setResponsibleShifts(attachedResponsibleShiftCollection);
 
             em.persist(staffMember);
             for (Shift shift : staffMember.getShifts()) {
@@ -61,10 +61,10 @@ public class StaffMemberJpaController {
                 shift = em.merge(shift);
             }
 
-            for (Shift responsibleShift : staffMember.getResponsibleShifts()) {
-                responsibleShift.setResponsible(staffMember);
-                responsibleShift = em.merge(responsibleShift);
-            }
+//            for (Shift responsibleShift : staffMember.getResponsibleShifts()) {
+//                responsibleShift.setResponsible(staffMember);
+//                responsibleShift = em.merge(responsibleShift);
+//            }
 
             utx.commit();
         } catch (Exception ex) {
@@ -100,15 +100,15 @@ public class StaffMemberJpaController {
             shiftCollectionNew = attachedShiftCollectionNew;
             staffMember.setShifts(shiftCollectionNew);
 
-            Collection<Shift> responsibleShiftCollectionOld = persistentStaffMember.getResponsibleShifts();
-            Collection<Shift> responsibleShiftCollectionNew = staffMember.getResponsibleShifts();
-            List<Shift> attachedResponsibleShiftCollectionNew = new ArrayList<Shift>();
-            for (Shift shiftCollectionNewResponsibleShiftToAttach : responsibleShiftCollectionNew) {
-                shiftCollectionNewResponsibleShiftToAttach = em.getReference(shiftCollectionNewResponsibleShiftToAttach.getClass(), shiftCollectionNewResponsibleShiftToAttach.getId());
-                attachedResponsibleShiftCollectionNew.add(shiftCollectionNewResponsibleShiftToAttach);
-            }
-            responsibleShiftCollectionNew = attachedResponsibleShiftCollectionNew;
-            staffMember.setResponsibleShifts(responsibleShiftCollectionNew);
+//            Collection<Shift> responsibleShiftCollectionOld = persistentStaffMember.getResponsibleShifts();
+//            Collection<Shift> responsibleShiftCollectionNew = staffMember.getResponsibleShifts();
+//            List<Shift> attachedResponsibleShiftCollectionNew = new ArrayList<Shift>();
+//            for (Shift shiftCollectionNewResponsibleShiftToAttach : responsibleShiftCollectionNew) {
+//                shiftCollectionNewResponsibleShiftToAttach = em.getReference(shiftCollectionNewResponsibleShiftToAttach.getClass(), shiftCollectionNewResponsibleShiftToAttach.getId());
+//                attachedResponsibleShiftCollectionNew.add(shiftCollectionNewResponsibleShiftToAttach);
+//            }
+//            responsibleShiftCollectionNew = attachedResponsibleShiftCollectionNew;
+//            staffMember.setResponsibleShifts(responsibleShiftCollectionNew);
 
             staffMember = em.merge(staffMember);
 
@@ -120,12 +120,12 @@ public class StaffMemberJpaController {
                 }
             }
 
-            for (Shift shiftCollectionNewResponsibleShift : responsibleShiftCollectionNew) {
-                if (!responsibleShiftCollectionOld.contains(shiftCollectionNewResponsibleShift)) {
-                    shiftCollectionNewResponsibleShift.setResponsible(staffMember);
-                    shiftCollectionNewResponsibleShift = em.merge(shiftCollectionNewResponsibleShift);
-                }
-            }
+//            for (Shift shiftCollectionNewResponsibleShift : responsibleShiftCollectionNew) {
+//                if (!responsibleShiftCollectionOld.contains(shiftCollectionNewResponsibleShift)) {
+//                    shiftCollectionNewResponsibleShift.setResponsible(staffMember);
+//                    shiftCollectionNewResponsibleShift = em.merge(shiftCollectionNewResponsibleShift);
+//                }
+//            }
 
             utx.commit();
         } catch (Exception ex) {
@@ -169,10 +169,10 @@ public class StaffMemberJpaController {
                 }
             }
 
-            for (Shift responsibleShiftToRemoveStaffMember : persistentStaffMember.getResponsibleShifts()) {
-                responsibleShiftToRemoveStaffMember.setResponsible(null);
-                em.merge(responsibleShiftToRemoveStaffMember);
-            }
+//            for (Shift responsibleShiftToRemoveStaffMember : persistentStaffMember.getResponsibleShifts()) {
+//                responsibleShiftToRemoveStaffMember.setResponsible(null);
+//                em.merge(responsibleShiftToRemoveStaffMember);
+//            }
 
             em.remove(persistentStaffMember);
             utx.commit();

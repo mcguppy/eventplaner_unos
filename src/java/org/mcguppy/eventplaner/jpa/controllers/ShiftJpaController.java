@@ -67,11 +67,11 @@ public class ShiftJpaController {
                 location = em.merge(location);
             }
 
-            if (null != shift.getResponsible()) {
-                StaffMember responsible = shift.getResponsible();
-                responsible.getResponsibleShifts().add(shift);
-                responsible = em.merge(responsible);
-            }
+//            if (null != shift.getResponsible()) {
+//                StaffMember responsible = shift.getResponsible();
+//                responsible.getResponsibleShifts().add(shift);
+//                responsible = em.merge(responsible);
+//            }
 
             for (StaffMember staffMember : shift.getStaffMembers()) {
                 staffMember.getShifts().add(shift);
@@ -108,7 +108,7 @@ public class ShiftJpaController {
             boolean shifResponsibleChanged = false;
 
             if (null != shift.getResponsible()) {
-                responsibleNew = em.getReference(responsibleNew.getClass(), responsibleNew.getId());
+                responsibleNew = em.getReference(shift.getResponsible().getClass(), shift.getResponsible().getId());
             }
 
             if (null != persistentShift.getResponsible()) {
@@ -120,18 +120,18 @@ public class ShiftJpaController {
                 if (responsibleNew.getId() != responsibleOld.getId()) {     // shift responsible has changed
                     shifResponsibleChanged = true;
                     // remove the responsability from the old responsible first
-                    if (responsibleOld.getResponsibleShifts().contains(persistentShift)) {
-                        responsibleOld.getResponsibleShifts().remove(persistentShift);
-                        em.persist(responsibleOld);
-                    }
+//                    if (responsibleOld.getResponsibleShifts().contains(persistentShift)) {
+//                        responsibleOld.getResponsibleShifts().remove(persistentShift);
+//                        em.persist(responsibleOld);
+//                    }
                 }
             } else if (null == responsibleNew && null != responsibleOld) {      // new, there is no more responsible for this shift
                 shifResponsibleChanged = true;
                  // remove the responsability from the old responsible first
-                if (responsibleOld.getResponsibleShifts().contains(persistentShift)) {
-                    responsibleOld.getResponsibleShifts().remove(persistentShift);
-                    em.persist(responsibleOld);
-                }
+//                if (responsibleOld.getResponsibleShifts().contains(persistentShift)) {
+//                    responsibleOld.getResponsibleShifts().remove(persistentShift);
+//                    em.persist(responsibleOld);
+//                }
             } else if (null != responsibleNew && null == responsibleOld)   {     // new, there is a shift responsible
                 shifResponsibleChanged = true;
             }
@@ -161,10 +161,10 @@ public class ShiftJpaController {
                 }
             }
 
-            if (shifResponsibleChanged == true && null != responsibleNew) {
-                responsibleNew.getResponsibleShifts().add(shift);
-                responsibleNew = em.merge(responsibleNew);
-            }
+//            if (shifResponsibleChanged == true && null != responsibleNew) {
+//                responsibleNew.getResponsibleShifts().add(shift);
+//                responsibleNew = em.merge(responsibleNew);
+//            }
 
             utx.commit();
         } catch (Exception ex) {
@@ -210,10 +210,10 @@ public class ShiftJpaController {
 
             if (null != shift.getResponsible()) {
                 StaffMember responsible = persistentShift.getResponsible();
-                if (responsible.getResponsibleShifts().contains(persistentShift)) {
-                    responsible.getResponsibleShifts().remove(persistentShift);
-                    em.persist(responsible);
-                }
+//                if (responsible.getResponsibleShifts().contains(persistentShift)) {
+//                    responsible.getResponsibleShifts().remove(persistentShift);
+//                    em.persist(responsible);
+//                }
             }
 
             for (StaffMember staffMemberToRemoveStaffMember : persistentShift.getStaffMembers()) {

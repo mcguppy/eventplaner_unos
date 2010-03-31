@@ -118,7 +118,7 @@ public class JsfUtil {
 
     public static String getAsString(Object object) {
         if (object instanceof Collection<?>) {
-            Collection<?> collection = (Collection<?>) object;
+            Collection<?> collection = (Collection<?>)object;
             if (collection.size() == 0) {
                 return "(No Items)";
             }
