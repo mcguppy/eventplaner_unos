@@ -103,12 +103,24 @@ public class ShiftJpaController {
             Shift persistentShift = em.find(Shift.class, shift.getId());
             Collection<StaffMember> staffMemberCollectionOld = persistentShift.getStaffMembers();
 
+            Collection<StaffMember> staffMemberCollectionNew = shift.getStaffMembers();
+            List<StaffMember> attachedStaffMemberCollectionNew = new ArrayList<StaffMember>();
+            for (StaffMember staffMemberCollectionNewStaffMemberToAttach : staffMemberCollectionNew) {
+                staffMemberCollectionNewStaffMemberToAttach = em.getReference(staffMemberCollectionNewStaffMemberToAttach.getClass(), staffMemberCollectionNewStaffMemberToAttach.getId());
+                attachedStaffMemberCollectionNew.add(staffMemberCollectionNewStaffMemberToAttach);
+            }
+            staffMemberCollectionNew = attachedStaffMemberCollectionNew;
+            shift.setStaffMembers(staffMemberCollectionNew);
+
             StaffMember responsibleOld = null;
             StaffMember responsibleNew = null;
             boolean shifResponsibleChanged = false;
 
             if (null != shift.getResponsible()) {
                 responsibleNew = em.getReference(shift.getResponsible().getClass(), shift.getResponsible().getId());
+                if (!shift.getStaffMembers().contains(responsibleNew)) {    // make sure, the responsibl is also a shift staffMember
+                    responsibleNew = null;
+                }
             }
 
             if (null != persistentShift.getResponsible()) {
@@ -125,29 +137,21 @@ public class ShiftJpaController {
                         em.persist(responsibleOld);
                     }
                 }
-            } else if (null == responsibleNew && null != responsibleOld) {      // new, there is no more responsible for this shift
+            } else if (null == responsibleNew && null != responsibleOld) {      // there is no more responsible for this shift
                 shifResponsibleChanged = true;
-                 // remove the responsability from the old responsible first
+                // remove the responsability from the old responsible first
                 if (responsibleOld.getResponsibleShifts().contains(persistentShift)) {
                     responsibleOld.getResponsibleShifts().remove(persistentShift);
                     em.persist(responsibleOld);
                 }
-            } else if (null != responsibleNew && null == responsibleOld)   {     // new, there is a shift responsible
+            } else if (null != responsibleNew && null == responsibleOld) {     // there is a shift responsible
                 shifResponsibleChanged = true;
             }
 
-            Collection<StaffMember> staffMemberCollectionNew = shift.getStaffMembers();
-            List<StaffMember> attachedStaffMemberCollectionNew = new ArrayList<StaffMember>();
-            for (StaffMember staffMemberCollectionNewStaffMemberToAttach : staffMemberCollectionNew) {
-                staffMemberCollectionNewStaffMemberToAttach = em.getReference(staffMemberCollectionNewStaffMemberToAttach.getClass(), staffMemberCollectionNewStaffMemberToAttach.getId());
-                attachedStaffMemberCollectionNew.add(staffMemberCollectionNewStaffMemberToAttach);
-            }
-            staffMemberCollectionNew = attachedStaffMemberCollectionNew;
-            shift.setStaffMembers(staffMemberCollectionNew);
             shift.setResponsible(responsibleNew);
 
             shift = em.merge(shift);
-            
+
             for (StaffMember staffMemberCollectionNewStaffMember : staffMemberCollectionNew) {
                 if (!staffMemberCollectionOld.contains(staffMemberCollectionNewStaffMember)) {
                     staffMemberCollectionNewStaffMember.getShifts().add(shift);
