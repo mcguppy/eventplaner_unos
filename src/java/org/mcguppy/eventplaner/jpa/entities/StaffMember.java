@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -48,8 +49,8 @@ public class StaffMember implements Serializable, Comparable {
     private String mailAddress;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "staffMembers")
     private Collection<Shift> shifts;
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible")
-//    private Collection<Shift> responsibleShifts;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible")
+    private Collection<Shift> responsibleShifts;
 
     public Long getId() {
         return id;
@@ -143,13 +144,13 @@ public class StaffMember implements Serializable, Comparable {
         this.shifts = shifts;
     }
 
-//    public Collection<Shift> getResponsibleShifts() {
-//        return responsibleShifts;
-//    }
-//
-//    public void setResponsibleShifts(Collection<Shift> responsibleShifts) {
-//        this.responsibleShifts = responsibleShifts;
-//    }
+    public Collection<Shift> getResponsibleShifts() {
+        return responsibleShifts;
+    }
+
+    public void setResponsibleShifts(Collection<Shift> responsibleShifts) {
+        this.responsibleShifts = responsibleShifts;
+    }
 
     @Override
     public int hashCode() {

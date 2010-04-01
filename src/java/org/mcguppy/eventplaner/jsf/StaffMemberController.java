@@ -2,6 +2,7 @@ package org.mcguppy.eventplaner.jsf;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +43,18 @@ public class StaffMemberController {
 
     public SelectItem[] getStaffMemberItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(jpaController.findStaffMemberEntities(), true);
+    }
+
+    public SelectItem[] getShiftStaffMemberItemsAvailableSelectOne() {
+        ShiftController shiftController = new ShiftController();
+        Shift shift = (Shift) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentShift", shiftController.getConverter(), null);
+        List<StaffMember> staffMemberList = new ArrayList<StaffMember>();
+        if (shift.getStaffMembers() != null) {
+            for (StaffMember staffMemberIter : shift.getStaffMembers()) {
+                staffMemberList.add(jpaController.findStaffMember(staffMemberIter.getId()));
+            }
+        }
+        return JsfUtil.getSelectItems(staffMemberList, true);
     }
 
     public StaffMember getStaffMember() {

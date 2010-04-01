@@ -42,7 +42,8 @@
                 <h:outputText value="Schicht-Verantwortlicher:"/>
                 <h:panelGroup>
                     <h:selectOneMenu id="shiftResponsible" value="#{shiftController.shift.responsible}"  title="shiftResponsible" >
-                        <f:selectItems value="#{staffMemberController.staffMemberItemsAvailableSelectOne}"/>
+                        <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
+                        <f:selectItems value="#{staffMemberController.shiftStaffMemberItemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGroup>
                 <h:outputText value="&nbsp;"/>
