@@ -81,6 +81,23 @@
                                 <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                             </h:outputText>
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ShiftTitle_responsible}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsible.lastName} #{item.responsible.firstName} #{item.responsible.city}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:outputText value=" "/>
+                            <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.ListShiftViewButton}">
+                                <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][shiftController.converter].jsfcrud_invoke}"/>
+                                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item.location][locationController.converter].jsfcrud_invoke}"/>
+                            </h:commandButton>
+                            <h:outputText value=" "/>
+                        </h:column>
                     </h:dataTable>
                 </h:panelGroup>
             </h:panelGrid>

@@ -44,6 +44,8 @@
                 <h:outputText value="#{shiftController.shift.endTime}" title="#{bundle.ViewShiftTitle_endTime}">
                     <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:outputText>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ShiftLabel_responsible}"/>
                 <h:outputText value="#{shiftController.shift.responsible.lastName} #{shiftController.shift.responsible.firstName} #{shiftController.shift.responsible.city}" title="#{bundle.ShiftTitle_responsible}"/>
                 <h:outputText value="&nbsp;"/>

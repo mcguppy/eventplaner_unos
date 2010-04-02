@@ -39,6 +39,10 @@
                 </h:outputText>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.ShiftLabel_responsible}"/>
+                <h:outputText value="#{shiftController.shift.responsible.lastName} #{shiftController.shift.responsible.firstName} #{shiftController.shift.responsible.city}" title="#{bundle.ShiftTitle_responsible}"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ViewShiftLabel_staffMembers}"/>
                 <h:outputText escape="false" value="#{bundle.ViewStaffMemberEmpty}" rendered="#{shiftController.shift.staffMembersSize == 0}"/>
                 <h:panelGroup rendered="#{shiftController.shift.staffMembersSize > 0}">
