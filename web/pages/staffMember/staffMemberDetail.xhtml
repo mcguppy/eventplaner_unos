@@ -12,7 +12,9 @@
         <ui:define name="navigation">
             <h:commandButton value="#{bundle.IndexButton}" action="index" immediate="true" />
             <h:outputText value=" "/>
-            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.ViewStaffMemberShowAllButton}"/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
             <h:outputText value=" "/>
             <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
             <h:outputText value=" "/>
@@ -52,7 +54,7 @@
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>
                 <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{staffMemberController.staffMember.shiftsSize == 0}"/>
                 <h:panelGroup rendered="#{staffMemberController.staffMember.shiftsSize > 0}">
-                    <h:dataTable value="#{staffMemberController.staffMember.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="600" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                    <h:dataTable value="#{staffMemberController.staffMember.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="750" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListShiftTitle_location}"/>

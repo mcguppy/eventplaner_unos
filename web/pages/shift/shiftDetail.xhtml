@@ -12,6 +12,10 @@
         <ui:define name="navigation">
             <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ViewShiftBackButton}" >
                 <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
@@ -107,6 +111,16 @@
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
                             </f:facet>
                             <h:outputText value="#{item.cellPhoneNr}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:outputText value=" "/>
+                            <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.ListStaffMemberViewButton}">
+                                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][staffMemberController.converter].jsfcrud_invoke}"/>
+                            </h:commandButton>
+                            <h:outputText value=" "/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>

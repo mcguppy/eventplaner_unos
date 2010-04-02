@@ -12,6 +12,10 @@
         <ui:define name="navigation">
             <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
+            <h:outputText value=" "/>
             <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.DestroyShiftBackButton}">
                 <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
             </h:commandButton>

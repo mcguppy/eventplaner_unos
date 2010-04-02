@@ -12,6 +12,10 @@
         <ui:define name="navigation">
             <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
             <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
+            <h:outputText value=" "/>
             <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
             <h:outputText value=" "/>
             <h:commandButton action="#{locationController.createSetup}" value="#{bundle.ListLocationCreateButton}"/>
