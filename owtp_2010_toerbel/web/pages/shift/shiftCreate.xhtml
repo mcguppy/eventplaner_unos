@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.CreateShiftTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}" immediate="true"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="locationDetail" value="#{bundle.CreateShiftBackButton}" immediate="true"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{shiftController.create}" value="#{bundle.CreateShiftSaveButton}" />
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateShiftLabel_location}" />
+                <h:outputText value="#{shiftController.shift.location.locationName}" title="#{bundle.CreateShiftTitle_location}"/>
+                <h:outputText value="#{bundle.CreateShiftLabel_description}"/>
+                <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.CreateShiftTitle_description}"/>
+                <h:outputLabel value="#{bundle.CreateShiftLabel_startTime}" for="startTime" />
+                <h:inputText id="startTime" value="#{shiftController.shift.startTime}" title="#{bundle.CreateShiftTitle_startTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_startTime}">
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                </h:inputText>
+                <h:outputLabel value="#{bundle.CreateShiftLabel_endTime}" for="endTime" />
+                <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.CreateShiftTitle_endTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_endTime}">
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                </h:inputText>
+                 <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.CreateShiftLabel_staffMembers}"/>
+                <h:panelGroup>
+                    <h:selectManyCheckbox id="staffMemberCollection" value="#{shiftController.shift.jsfcrud_transform[jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method.collectionToArray][jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method.arrayToCollection].staffMembers}" title="StaffMemberCollection" layout="pageDirection" converter="#{staffMemberController.converter}" >
+                        <f:selectItems value="#{staffMemberController.staffMemberItemsAvailableSelectMany}"/>
+                    </h:selectManyCheckbox>
+                </h:panelGroup>
+            </h:panelGrid>
+        </ui:define>
+    </ui:composition>
+</html>

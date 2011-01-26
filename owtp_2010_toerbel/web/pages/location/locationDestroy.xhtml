@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.DestroyLocationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.DestroyLocationBackButton}" >
+                <h:outputText value=" "/>
+                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+            <h:commandButton action="#{locationController.destroy}" value="#{bundle.DestroyLocationDestroyButton}">
+                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][locationController.location][locationController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green"  warnStyle="color: orange" layout="table"/>
+            </h:panelGroup>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewLocationLabel_locationName}"/>
+                <h:outputText value="#{locationController.location.locationName}" title="#{bundle.ViewLocationTitle_locationName}"/>
+                <h:outputText value="#{bundle.ViewLocationLabel_description}"/>
+                <h:outputText value="#{locationController.location.description}" title="#{bundle.ViewLocationTitle_description}"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.ViewLocationLabel_shifts}"/>
+                <h:outputText escape="false" value="#{bundle.ViewShiftEmpty}" rendered="#{locationController.location.shiftsSize == 0}"/>
+                <h:panelGroup rendered="#{locationController.location.shiftsSize > 0}">
+                    <h:dataTable value="#{locationController.location.shifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="750" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startTime}">
+                                <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endTime}">
+                                <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                            </h:outputText>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
+        </ui:define>
+    </ui:composition>
+
+</html>

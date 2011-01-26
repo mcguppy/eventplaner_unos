@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.ViewShiftTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ViewShiftBackButton}" >
+                <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift.location][locationController.converter].jsfcrud_invoke}"/>
+            </h:commandButton>
+            <h:outputText value=" "/>
+            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{shiftController.editSetup}" value="#{bundle.ViewShiftEditButton}" >
+                <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
+            </h:commandButton>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{shiftController.destroySetup}" value="#{bundle.ViewShiftDestroyButton}">
+                <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewShiftLabel_location}"/>
+                <h:outputText value="#{shiftController.shift.location.locationName}" title="#{bundle.ViewShiftTitle_location}"/>
+                <h:outputText value="#{bundle.ViewShiftLabel_description}"/>
+                <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.ViewShiftTitle_description}"/>
+                <h:outputText value="#{bundle.ViewShiftLabel_startTime}"/>
+                <h:outputText value="#{shiftController.shift.startTime}" title="#{bundle.ViewShiftTitle_startTime}">
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                </h:outputText>
+                <h:outputText value="#{bundle.ViewShiftLabel_endTime}"/>
+                <h:outputText value="#{shiftController.shift.endTime}" title="#{bundle.ViewShiftTitle_endTime}">
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                </h:outputText>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.ShiftLabel_responsible}"/>
+                <h:outputText value="#{shiftController.shift.responsible.lastName} #{shiftController.shift.responsible.firstName} #{shiftController.shift.responsible.city}" title="#{bundle.ShiftTitle_responsible}"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>
+                <h:outputText value="#{bundle.ViewShiftLabel_staffMembers}"/>
+                <h:outputText escape="false" value="#{bundle.ViewStaffMemberEmpty}" rendered="#{shiftController.shift.staffMembersSize == 0}"/>
+                <h:panelGroup rendered="#{shiftController.shift.staffMembersSize > 0}">
+                    <h:dataTable value="#{shiftController.shift.staffMembers}" var="item" border="0" cellpadding="2" cellspacing="0" width="750" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_title}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.title}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_lastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_firstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.firstName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_street}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.street}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_zip}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.zip}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_city}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.city}"/>
+                        </h:column>
+                        <!-- <h:column>
+                             <f:facet name="header">
+                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
+                             </f:facet>
+                             <h:outputText value="#{item.mailAddress}"/>
+                         </h:column>-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phoneNr}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cellPhoneNr}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:outputText value=" "/>
+                            <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.ListStaffMemberViewButton}">
+                                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][staffMemberController.converter].jsfcrud_invoke}"/>
+                            </h:commandButton>
+                            <h:outputText value=" "/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
+        </ui:define>
+    </ui:composition>
+</html>

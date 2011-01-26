@@ -1,0 +1,99 @@
+root { 
+    display: block;
+}
+body, input, select, textarea, div, span, a, td, th, tr, p, form {
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: 12px;
+}
+
+body, select, textarea{
+    background: white;
+}
+
+select, textarea {
+    border: 1px solid black;
+    background: white;
+}
+
+a {
+    color: #e33b06;
+}
+
+table {
+    empty-cells: show;
+}
+
+table.jsfcrud_list th {
+    font-size: x-small;
+    color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #898989;
+    text-align: left;
+    padding: 6px;
+    background-color: #c5c5c5;
+}
+
+td {
+    vertical-align: top;
+    padding-bottom: 8px;
+    font-size: small;
+}
+
+table.jsfcrud_list td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #898989;
+    vertical-align: baseline;
+    padding-bottom: 0px;
+}
+
+tr.jsfcrud_odd_row {
+    background-color: #ffffff;
+    color: #4e6a71;
+}
+
+
+tr.jsfcrud_even_row {
+    background-color: #e5e5e6;
+    color: #4e6a71;
+}
+
+#busyImage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+
+#container {
+    margin-top: 20px;
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #DDDDDD;
+}
+
+#main_title {
+    background: black;
+    padding-left: 20px;
+}
+#main_title h1 {
+    margin: 0px;
+    padding: 10px;
+    color: #CCCCCC;
+    font-size: 140%;
+}
+
+#content {
+    padding: 20px;
+    text-align: left;
+}
+
+#navigation {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    text-align: left;
+
+}
