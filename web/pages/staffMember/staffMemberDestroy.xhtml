@@ -47,6 +47,8 @@
                 <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.DestroyStaffMemberTitle_phoneNr}"/>
                 <h:outputText value="#{bundle.DestroyStaffMemberLabel_cellPhoneNr}"/>
                 <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.DestroyStaffMemberTitle_cellPhoneNr}"/>
+                <h:outputLabel value="#{bundle.DestroyStaffMemberLabel_remarks}" for="remarks" />
+                <h:inputTextarea readonly="true" rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.DestroyStaffMemberTitle_remarks}" />
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>

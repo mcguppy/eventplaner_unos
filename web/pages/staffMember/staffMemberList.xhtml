@@ -45,6 +45,7 @@
                         </f:facet>
                         <h:outputText value="#{item.firstName}"/>
                     </h:column>
+                    <!--
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_street}"/>
@@ -57,6 +58,7 @@
                         </f:facet>
                         <h:outputText value="#{item.zip}"/>
                     </h:column>
+                    -->
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_city}"/>
@@ -68,7 +70,7 @@
                             <h:outputText value="#{bundle.ListStaffMemberTitle_mailAddress}"/>
                         </f:facet>
                         <h:outputText value="#{item.mailAddress}"/>
-                    </h:column>-->
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_phoneNr}"/>
@@ -80,6 +82,13 @@
                             <h:outputText value="#{bundle.ListStaffMemberTitle_cellPhoneNr}"/>
                         </f:facet>
                         <h:outputText value="#{item.cellPhoneNr}"/>
+                    </h:column>
+                    -->
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_numberOfShifts}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.shiftsSize}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">

@@ -45,6 +45,8 @@
                 <h:inputText id="phoneNr" value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.CreateStaffMemberTitle_phoneNr}" />
                 <h:outputLabel value="#{bundle.CreateStaffMemberLabel_cellPhoneNr}" for="cellPhoneNr" />
                 <h:inputText id="cellPhoneNr" value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.CreateStaffMemberTitle_cellPhoneNr}" />
+                <h:outputLabel value="#{bundle.CreateStaffMemberLabel_remarks}" for="remarks" />
+                <h:inputTextarea rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.CreateStaffMemberTitle_remarks}" />
             </h:panelGrid>
         </ui:define>
     </ui:composition>

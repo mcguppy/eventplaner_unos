@@ -49,6 +49,8 @@
                 <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_cellPhoneNr}"/>
                 <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
+                <h:outputLabel value="#{bundle.ViewStaffMemberLabel_remarks}" for="remarks" />
+                <h:inputTextarea readonly="true" rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.ViewStaffMemberTitle_remarks}" />
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>

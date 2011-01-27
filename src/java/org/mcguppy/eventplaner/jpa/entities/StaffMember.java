@@ -2,6 +2,7 @@ package org.mcguppy.eventplaner.jpa.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -47,6 +49,8 @@ public class StaffMember implements Serializable, Comparable {
     private String phoneNr;
     private String cellPhoneNr;
     private String mailAddress;
+    @Lob @Basic(fetch=FetchType.EAGER)
+    private String remarks;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "staffMembers")
     private Collection<Shift> shifts;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible")
@@ -130,6 +134,14 @@ public class StaffMember implements Serializable, Comparable {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public Collection<Shift> getShifts() {
