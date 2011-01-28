@@ -41,6 +41,8 @@
                 <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.EditShiftTitle_endTime}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_endTime}">
                     <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:inputText>
+                <h:outputLabel value="#{bundle.EditShiftLabel_numberOfStaffMembers}" />
+                <h:inputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.EditShiftTitle_numberOfStaffMembers}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_numberOfStaffMembers}"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="Schicht-Verantwortlicher:"/>

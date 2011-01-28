@@ -48,6 +48,8 @@
                 <h:outputText value="#{shiftController.shift.endTime}" title="#{bundle.ViewShiftTitle_endTime}">
                     <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:outputText>
+                <h:outputLabel value="#{bundle.ViewShiftLabel_numberOfStaffMembers}" />
+                <h:outputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.ViewShiftTitle_numberOfStaffMembers}"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ShiftLabel_responsible}"/>

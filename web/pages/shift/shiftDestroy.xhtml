@@ -41,6 +41,8 @@
                 <h:outputText value="#{shiftController.shift.endTime}" title="#{bundle.DestroyShiftTitle_endTime}">
                     <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
                 </h:outputText>
+                <h:outputLabel value="#{bundle.DestroyShiftLabel_numberOfStaffMembers}" />
+                <h:outputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.DestoryShiftTitle_numberOfStaffMembers}"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ShiftLabel_responsible}"/>

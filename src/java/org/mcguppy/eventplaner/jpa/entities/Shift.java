@@ -29,7 +29,7 @@ public class Shift implements Serializable, Comparable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private int staffNr;
+    private int numberOfStaffMembers;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
@@ -103,6 +103,14 @@ public class Shift implements Serializable, Comparable {
 
     public void setResponsible(StaffMember responsible) {
         this.responsible = responsible;
+    }
+
+    public int getNumberOfStaffMembers() {
+        return numberOfStaffMembers;
+    }
+
+    public void setNumberOfStaffMembers(int numberOfStaffMembers) {
+        this.numberOfStaffMembers = numberOfStaffMembers;
     }
 
     @Override
