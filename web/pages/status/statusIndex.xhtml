@@ -7,7 +7,7 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ApplicationName} - #{bundle.StartPage}"></h:outputText>
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.StatusCheckIndexPage}"></h:outputText>
         </ui:define>
         <ui:define name="navigation">
             <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
@@ -15,8 +15,11 @@
             <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
             <h:outputText value=" "/>
             <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
-            <h:outputText value=" "/>
-            <h:commandButton value="#{bundle.statusButton}" action="/pages/status/statusIndex" immediate="true" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h:commandButton immediate="true" action="/pages/status/checkedShiftList" value="#{bundle.statusCheckShiftButton}"/>
         </ui:define>
         <ui:define name="content" />
     </ui:composition>

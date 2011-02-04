@@ -51,6 +51,12 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>statusCheckController</managed-bean-name>
+        <managed-bean-class>org.mcguppy.eventplaner.jsf.StatusCheckController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
     <converter>
         <converter-for-class>org.mcguppy.eventplaner.jpa.entities.Location</converter-for-class>
         <converter-class>org.mcguppy.eventplaner.jsf.LocationConverter</converter-class>

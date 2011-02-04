@@ -21,7 +21,7 @@ import org.mcguppy.eventplaner.jsf.util.JsfUtil;
 
 /**
  *
- * @author mbohm
+ * @author stefan meichtry
  */
 public class StaffMemberController {
 

@@ -63,6 +63,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListShiftTitle_responsible}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsible.lastName} #{item.responsible.firstName} #{item.responsible.city}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListShiftTitle_sollNumberOfStaffMember}"/>
                             </f:facet>
                             <h:outputText value="#{item.numberOfStaffMembers}" />
