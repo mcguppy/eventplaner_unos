@@ -52,8 +52,20 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>statusCheckController</managed-bean-name>
-        <managed-bean-class>org.mcguppy.eventplaner.jsf.StatusCheckController</managed-bean-class>
+        <managed-bean-name>staffMemberStatusCheckController</managed-bean-name>
+        <managed-bean-class>org.mcguppy.eventplaner.jsf.StaffMemberStatusCheckController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>shiftStatusCheckController</managed-bean-name>
+        <managed-bean-class>org.mcguppy.eventplaner.jsf.ShiftStatusCheckController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>locationStatusCheckController</managed-bean-name>
+        <managed-bean-class>org.mcguppy.eventplaner.jsf.LocationStatusCheckController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 

@@ -11,15 +11,15 @@ import org.mcguppy.eventplaner.jpa.entities.Shift;
  *
  * @author stefan meichtry
  */
-public class StatusCheckController {
+public class ShiftStatusCheckController {
 
-    private ShiftJpaController jpaController = null;
+    private ShiftJpaController shiftJpaController = null;
     private List<Shift> shiftItems = new ArrayList<Shift>();
 
-    public StatusCheckController() {
+    public ShiftStatusCheckController() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        jpaController = (ShiftJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "shiftJpa");
-        shiftItems = jpaController.findShiftEntities();
+        shiftJpaController = (ShiftJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "shiftJpa");
+        shiftItems = shiftJpaController.findShiftEntities();
     }
 
     public List<Shift> getShiftItemsWithLessMembers() {
@@ -56,5 +56,17 @@ public class StatusCheckController {
         }
         Collections.sort(shiftItemsWithOutResposible);
         return shiftItemsWithOutResposible;
+    }
+
+        public List<Shift> getShiftItemsStartTimeNotBeforeEndTime() {
+        List<Shift> shiftItemsStartTimeNotBeforeEndTime = new ArrayList<Shift>();
+
+        for (Shift shift : shiftItems) {
+            if ((!shift.getStartTime().before(shift.getEndTime())) || (shift.getStartTime().equals(shift.getEndTime()))) {
+                shiftItemsStartTimeNotBeforeEndTime.add(shift);
+            }
+        }
+        Collections.sort(shiftItemsStartTimeNotBeforeEndTime);
+        return shiftItemsStartTimeNotBeforeEndTime;
     }
 }

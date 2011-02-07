@@ -8,6 +8,7 @@
         <Node id="pages/status/statusIndex.xhtml" x="650" y="300" zoom="true"/>
         <Node id="pages/staffMember/staffMemberList.xhtml" x="150" y="600" zoom="true"/>
         <Node id="pages/location/locationEdit.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="pages/status/checkedShiftList.xhtml" x="650" y="600" zoom="true"/>
         <Node id="pages/location/locationDestroy.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="pages/shift/shiftList.xhtml" x="1150" y="300" zoom="true"/>
         <Node id="pages/shift/shiftCreate.xhtml" x="650" y="450" zoom="true"/>

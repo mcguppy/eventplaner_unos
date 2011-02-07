@@ -19,7 +19,12 @@
             <br />
             <br />
             <br />
+            <h:commandButton immediate="true" action="/pages/status/checkedStaffMemberList" value="#{bundle.statusCheckStaffMemberButton}"/>
+            <h:outputText value=" "/>
+            <h:commandButton immediate="true" action="/pages/status/checkedLocationList" value="#{bundle.statusCheckLocationButton}"/>
+            <h:outputText value=" "/>
             <h:commandButton immediate="true" action="/pages/status/checkedShiftList" value="#{bundle.statusCheckShiftButton}"/>
+            <h:outputText value=" "/>
         </ui:define>
         <ui:define name="content" />
     </ui:composition>
