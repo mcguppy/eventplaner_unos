@@ -18,8 +18,7 @@
             <br />
             <br />
             <br />
-            <br />
-             <h:commandButton value="#{bundle.statusButton}" action="/pages/status/statusIndex" immediate="true" />
+            <h:commandButton value="#{bundle.statusButton}" action="/pages/status/statusIndex" immediate="true" />
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
@@ -27,64 +26,36 @@
             </h:panelGroup>
 
 
-             <h:panelGroup>
-                <h:outputText value="#{bundle.StatusCheckShiftStartTimeNotBeforeEndTime_Title}" />
+            <h:panelGroup>
+                <h:outputText value="#{bundle.StatusCheckLocationWithOutShifts_Title}" />
                 <br />
                 <br />
-                <h:dataTable value="#{shiftStatusCheckController.shiftItemsStartTimeNotBeforeEndTime}" var="item" border="0" cellpadding="2" cellspacing="0" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
+                <h:dataTable value="#{locationStatusCheckController.locationItemsWithNoShifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="900" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_location}"/>
+                            <h:outputText value="#{bundle.ListLocationTitle_locationName}"/>
                         </f:facet>
-                        <h:outputText value="#{item.location.locationName}"/>
+                        <h:outputText value="#{item.locationName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_description}"/>
+                            <h:outputText value="#{bundle.ListLocationTitle_description}"/>
                         </f:facet>
-                        <h:outputText value="#{item.location.description}"/>
+                        <h:outputText value="#{item.description}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
+                            <h:outputText value="#{bundle.ListLocationTitle_numberOfShifts}"/>
                         </f:facet>
-                        <h:outputText value="#{item.startTime}">
-                            <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.endTime}">
-                            <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_responsible}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.responsible.lastName} #{item.responsible.firstName} #{item.responsible.city}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_sollNumberOfStaffMember}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.numberOfStaffMembers}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListShiftTitle_isNumberOfStaffMember}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.staffMembersSize}" />
+                        <h:outputText value="#{item.shiftsSize}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
                         <h:outputText value=" "/>
-                        <h:commandButton action="#{shiftController.detailSetup}" value="#{bundle.ListShiftViewButton}">
-                            <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][shiftController.converter].jsfcrud_invoke}"/>
+                        <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ListLocationViewButton}">
+                            <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][locationController.converter].jsfcrud_invoke}"/>
                         </h:commandButton>
                         <h:outputText value=" "/>
                     </h:column>
