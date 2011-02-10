@@ -1,4 +1,3 @@
-
 package org.mcguppy.eventplaner.domain.metadata;
 
 import java.util.Date;
@@ -11,17 +10,17 @@ import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 public class StaffMemberMetaData {
 
     private StaffMember staffMember;
-    private Date minShiftDeltaTime;
+    private Long minShiftDeltaTime;
 
     public StaffMemberMetaData(StaffMember staffMember) {
         this.staffMember = staffMember;
     }
 
-    public Date getMinShiftDeltaTime() {
+    public Long getMinShiftDeltaTime() {
         return minShiftDeltaTime;
     }
 
-    public void setMinShiftDeltaTime(Date minShiftDeltaTime) {
+    public void setMinShiftDeltaTime(Long minShiftDeltaTime) {
         this.minShiftDeltaTime = minShiftDeltaTime;
     }
 
@@ -33,7 +32,13 @@ public class StaffMemberMetaData {
         this.staffMember = staffMember;
     }
 
-
-    
-
+    public String getMinShiftDeltaTimeHoursMinutesSecondsString() {
+        String format = String.format("%%0%dd", 2);
+        Long elapsedTime =  minShiftDeltaTime / 1000;
+        String seconds = String.format(format, elapsedTime % 60);
+        String minutes = String.format(format, (elapsedTime % 3600) / 60);
+        String hours = String.format(format, elapsedTime / 3600);
+        String time = hours + ":" + minutes + ":" + seconds;
+        return time;
+    }
 }

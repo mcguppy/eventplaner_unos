@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.faces.context.FacesContext;
+import org.mcguppy.eventplaner.domain.metadata.StaffMemberMetaData;
+import org.mcguppy.eventplaner.domain.metadata.StaffMemberMetaDataController;
 import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 
@@ -15,11 +17,14 @@ public class StaffMemberStatusCheckController {
 
     private StaffMemberJpaController staffMemberJpaController = null;
     private List<StaffMember> staffMemberItems = new ArrayList<StaffMember>();
+    private StaffMemberMetaDataController staffMemberMetaDataController;
+
 
     public StaffMemberStatusCheckController() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         staffMemberJpaController = (StaffMemberJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "staffMemberJpa");
         staffMemberItems = staffMemberJpaController.findStaffMemberEntities();
+        staffMemberMetaDataController = new StaffMemberMetaDataController();
     }
 
     public List<StaffMember> getStaffMemberItemsWithNoShifts() {
@@ -52,5 +57,9 @@ public class StaffMemberStatusCheckController {
         }
         Collections.sort(staffMemberItemsMostShifts);
         return staffMemberItemsMostShifts;
+    }
+
+    public List<StaffMemberMetaData> getStaffMemberMetaDataItemWithShortestTimeBetweenShifts() {
+        return this.staffMemberMetaDataController.getStaffMemberMetaDataItemsWithShortestTimeBetweenShifts(staffMemberItems, 100);
     }
 }
