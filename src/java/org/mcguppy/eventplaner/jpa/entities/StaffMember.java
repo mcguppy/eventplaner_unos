@@ -15,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -49,8 +50,11 @@ public class StaffMember implements Serializable, Comparable {
     private String phoneNr;
     private String cellPhoneNr;
     private String mailAddress;
-    @Lob @Basic(fetch=FetchType.EAGER)
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     private String remarks;
+    @Transient
+    private Long minShiftDeltaTime;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "staffMembers")
     private Collection<Shift> shifts;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible")
@@ -164,6 +168,14 @@ public class StaffMember implements Serializable, Comparable {
         this.responsibleShifts = responsibleShifts;
     }
 
+    public Long getMinShiftDeltaTime() {
+        return minShiftDeltaTime;
+    }
+
+    public void setMinShiftDeltaTime(Long minShiftDeltaTime) {
+        this.minShiftDeltaTime = minShiftDeltaTime;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -182,6 +194,16 @@ public class StaffMember implements Serializable, Comparable {
             return false;
         }
         return true;
+    }
+
+    public String getMinShiftDeltaTimeHoursMinutesSecondsString() {
+        String format = String.format("%%0%dd", 2);
+        Long elapsedTime = minShiftDeltaTime / 1000;
+        String seconds = String.format(format, elapsedTime % 60);
+        String minutes = String.format(format, (elapsedTime % 3600) / 60);
+        String hours = String.format(format, elapsedTime / 3600);
+        String time = hours + ":" + minutes + ":" + seconds;
+        return time;
     }
 
     @Override

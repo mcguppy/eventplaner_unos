@@ -133,36 +133,36 @@
                 <h:outputText value="#{bundle.StatusCheckStaffMemberWithShortestTimeBetweenShifts_Title}" />
                 <br />
                 <br />
-                <h:dataTable value="#{staffMemberStatusCheckController.staffMemberMetaDataItemWithShortestTimeBetweenShifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="900" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                <h:dataTable value="#{staffMemberStatusCheckController.staffMemberItemsWithShortestTimeBetweenShifts}" var="item" border="0" cellpadding="2" cellspacing="0" width="900" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_title}"/>
                         </f:facet>
-                        <h:outputText value="#{item.staffMember.title}"/>
+                        <h:outputText value="#{item.title}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_lastName}"/>
                         </f:facet>
-                        <h:outputText value="#{item.staffMember.lastName}"/>
+                        <h:outputText value="#{item.lastName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_firstName}"/>
                         </f:facet>
-                        <h:outputText value="#{item.staffMember.firstName}"/>
+                        <h:outputText value="#{item.firstName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_city}"/>
                         </f:facet>
-                        <h:outputText value="#{item.staffMember.city}"/>
+                        <h:outputText value="#{item.city}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListStaffMemberTitle_numberOfShifts}"/>
                         </f:facet>
-                        <h:outputText value="#{item.staffMember.shiftsSize}"/>
+                        <h:outputText value="#{item.shiftsSize}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
@@ -170,18 +170,16 @@
                         </f:facet>
                         <h:outputText value="#{item.minShiftDeltaTimeHoursMinutesSecondsString}"/>
                     </h:column>
-                    <!--
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
                         <h:outputText value=" "/>
                         <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.ListStaffMemberViewButton}">
-                            <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item.staffMember][staffMemberController.converter].jsfcrud_invoke}"/>
+                            <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][staffMemberController.converter].jsfcrud_invoke}"/>
                         </h:commandButton>
                         <h:outputText value=" "/>
                     </h:column>
-                    -->
                 </h:dataTable>
             </h:panelGroup>
 
