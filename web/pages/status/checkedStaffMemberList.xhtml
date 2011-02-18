@@ -14,6 +14,7 @@
             <h:outputText value=" "/>
             <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
             <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
             <br />
             <br />
             <br />
@@ -23,7 +24,6 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-
 
             <h:panelGroup>
                 <h:outputText value="#{bundle.StatusCheckStaffMemberWithNoShifts_Title}" />

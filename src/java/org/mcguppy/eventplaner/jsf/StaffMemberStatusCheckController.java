@@ -9,6 +9,7 @@ import org.mcguppy.eventplaner.jsf.comperator.StaffMemberShiftDeltaTimeComperato
 import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
+import org.mcguppy.eventplaner.jsf.comperator.StaffMemberShiftSizeComperator;
 
 /**
  *
@@ -29,7 +30,7 @@ public class StaffMemberStatusCheckController {
         List<StaffMember> staffMemberItemsNoShifts = new ArrayList<StaffMember>();
 
         for (StaffMember staffMember : staffMemberItems) {
-            if (staffMember.getShifts().size() < 1) {
+            if (staffMember.getShiftsSize() == 0) {
                 staffMemberItemsNoShifts.add(staffMember);
             }
         }
@@ -38,40 +39,40 @@ public class StaffMemberStatusCheckController {
     }
 
     public List<StaffMember> getStaffMemberItemsWithMostShifts() {
+        int numberOfItems = 50;
         List<StaffMember> staffMemberItemsMostShifts = new ArrayList<StaffMember>();
-        int maxNumberOfShifts = 1;
 
         for (StaffMember staffMember : staffMemberItems) {
-            if (staffMember.getShifts().size() > maxNumberOfShifts) {
-                staffMemberItemsMostShifts.clear();
+            if (staffMember.getShiftsSize() > 0) {
                 staffMemberItemsMostShifts.add(staffMember);
-                maxNumberOfShifts = staffMember.getShifts().size();
-            } else {
-                if (staffMember.getShifts().size() == maxNumberOfShifts) {
-                    staffMemberItemsMostShifts.add(staffMember);
-                }
             }
-
         }
-        Collections.sort(staffMemberItemsMostShifts);
-        return staffMemberItemsMostShifts;
+
+        Collections.sort(staffMemberItemsMostShifts, new StaffMemberShiftSizeComperator());
+        if (numberOfItems >= staffMemberItemsMostShifts.size()) {
+            return staffMemberItemsMostShifts;
+        }
+        return staffMemberItemsMostShifts.subList(0, numberOfItems);
     }
 
     public List<StaffMember> getStaffMemberItemsWithShortestTimeBetweenShifts() {
-        int numberOfItems = 100;
+        int numberOfItems = 50;
         calculateMinShiftDeltaTime();
-        List<StaffMember>staffMemberItemsWithShortestTimeBetweenShifts = staffMemberItems;
-        Collections.sort(staffMemberItemsWithShortestTimeBetweenShifts, new StaffMemberShiftDeltaTimeComperator());
-        Iterator<StaffMember> iter = staffMemberItemsWithShortestTimeBetweenShifts.iterator();
-        while (iter.hasNext()) {
-            if (iter.next().getMinShiftDeltaTime() == Long.MAX_VALUE) {
-                iter.remove();
+        Collections.sort(staffMemberItems, new StaffMemberShiftDeltaTimeComperator());
+        List<StaffMember> staffMemberItemsWithShortestTimeBetweenShifts = new ArrayList<StaffMember>();
+        int counter = 0;
+        for(StaffMember staffMember : staffMemberItems) {
+            counter++;
+            if(staffMember.getMinShiftDeltaTime() == Long.MAX_VALUE){
+                break;
+            }
+            staffMemberItemsWithShortestTimeBetweenShifts.add(staffMember);
+            if(counter >= numberOfItems) {
+                break;
             }
         }
-        if (numberOfItems >= staffMemberItemsWithShortestTimeBetweenShifts.size()) {
-            return staffMemberItemsWithShortestTimeBetweenShifts;
-        }
-        return staffMemberItemsWithShortestTimeBetweenShifts.subList(0, numberOfItems);
+        return staffMemberItemsWithShortestTimeBetweenShifts;
+        
     }
 
     private void calculateMinShiftDeltaTime() {
