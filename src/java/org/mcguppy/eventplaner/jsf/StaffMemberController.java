@@ -181,6 +181,11 @@ public class StaffMemberController {
         return staffMemberItems;
     }
 
+    public List<StaffMember> getRefreshedStaffMemberItems() {
+        this.reset();
+        return this.getStaffMemberItems();
+    }
+
     private String relatedControllerOutcome() {
         String relatedControllerString = JsfUtil.getRequestParameter("jsfcrud.relatedController");
         String relatedControllerTypeString = JsfUtil.getRequestParameter("jsfcrud.relatedControllerType");

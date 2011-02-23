@@ -57,7 +57,7 @@
                 <h:outputText value="#{bundle.EditShiftLabel_staffMembers}"/>
                 <h:panelGroup>
                     <h:selectManyCheckbox id="staffMemberCollection" value="#{shiftController.shift.staffMembers}" layout="pageDirection" converter="#{staffMemberController.converter}">
-                        <f:selectItems value="#{staffMemberController.staffMemberItems}" var="member" itemLabel="#{member.lastName} #{member.firstName} #{member.city}; #{member.shiftsSize}; #{member.remarks}" itemValue="#{member}" />
+                        <f:selectItems value="#{staffMemberController.refreshedStaffMemberItems}" var="member" itemLabel="#{member.lastName} #{member.firstName} #{member.city}; #{member.shiftsSize}; #{member.remarks}" itemValue="#{member}" />
                     </h:selectManyCheckbox>
                 </h:panelGroup>
             </h:panelGrid>
