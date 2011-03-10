@@ -50,7 +50,7 @@
                                 <h:outputText value="#{bundle.ListShiftTitle_startTime}"/>
                             </f:facet>
                             <h:outputText value="#{item.startTime}">
-                                <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                                <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternOut}" />
                             </h:outputText>
                         </h:column>
                         <h:column>
@@ -58,7 +58,7 @@
                                 <h:outputText value="#{bundle.ListShiftTitle_endTime}"/>
                             </f:facet>
                             <h:outputText value="#{item.endTime}">
-                                <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                                <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternOut}" />
                             </h:outputText>
                         </h:column>
                         <h:column>

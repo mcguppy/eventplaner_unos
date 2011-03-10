@@ -35,11 +35,11 @@
                 <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.EditShiftTitle_description}"/>
                 <h:outputLabel value="#{bundle.EditShiftLabel_startTime}" for="startTime" />
                 <h:inputText id="startTime" value="#{shiftController.shift.startTime}" title="#{bundle.EditShiftTitle_startTime}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_startTime}">
-                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternIn}" />
                 </h:inputText>
                 <h:outputLabel value="#{bundle.EditShiftLabel_endTime}" for="endTime" />
                 <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.EditShiftTitle_endTime}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_endTime}">
-                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternIn}" />
                 </h:inputText>
                 <h:outputLabel value="#{bundle.EditShiftLabel_numberOfStaffMembers}" />
                 <h:inputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.EditShiftTitle_numberOfStaffMembers}" required="true" requiredMessage="#{bundle.EditShiftRequiredMessage_numberOfStaffMembers}"/>

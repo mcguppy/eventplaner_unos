@@ -35,11 +35,11 @@
                 <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.DestroyShiftTitle_description}"/>
                 <h:outputText value="#{bundle.ViewShiftLabel_startTime}"/>
                 <h:outputText value="#{shiftController.shift.startTime}" title="#{bundle.DestroyShiftTitle_startTime}">
-                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternOut}" />
                 </h:outputText>
                 <h:outputText value="#{bundle.DestroyShiftLabel_endTime}"/>
                 <h:outputText value="#{shiftController.shift.endTime}" title="#{bundle.DestroyShiftTitle_endTime}">
-                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePattern}" />
+                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternOut}" />
                 </h:outputText>
                 <h:outputLabel value="#{bundle.DestroyShiftLabel_numberOfStaffMembers}" />
                 <h:outputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.DestoryShiftTitle_numberOfStaffMembers}"/>
