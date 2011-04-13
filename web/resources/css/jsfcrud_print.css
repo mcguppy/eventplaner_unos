@@ -1,8 +1,11 @@
-
 #navigation {
     visibility: hidden;
 }
 
 input {
+    visibility: hidden;
+}
+
+.no-print{
     visibility: hidden;
 }

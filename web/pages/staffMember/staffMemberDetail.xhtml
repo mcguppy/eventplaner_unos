@@ -31,7 +31,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:panelGrid columns="2">
-                <h:outputText value="#{bundle.ViewStaffMemberLabel_title}"/>
+                <h:outputText value="#{bundle.ViewStaffMemberLabel_title}" />
                 <h:outputText value="#{staffMemberController.staffMember.title}" title="#{bundle.ViewStaffMemberTitle_title}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_firstName}"/>
                 <h:outputText value="#{staffMemberController.staffMember.firstName}" title="#{bundle.ViewStaffMemberTitle_firstName}"/>
@@ -49,8 +49,8 @@
                 <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_cellPhoneNr}"/>
                 <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
-                <h:outputLabel value="#{bundle.ViewStaffMemberLabel_remarks}" for="remarks" />
-                <h:inputTextarea readonly="true" rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.ViewStaffMemberTitle_remarks}" />
+                <h:outputLabel value="#{bundle.ViewStaffMemberLabel_remarks}" for="remarks" styleClass="no-print"/>
+                <h:inputTextarea readonly="true" rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.ViewStaffMemberTitle_remarks}" styleClass="no-print" />
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>
@@ -91,7 +91,7 @@
                             </f:facet>
                             <h:outputText value="#{item.responsible.lastName} #{item.responsible.firstName} #{item.responsible.city}"/>
                         </h:column>
-                         <h:column>
+                        <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
