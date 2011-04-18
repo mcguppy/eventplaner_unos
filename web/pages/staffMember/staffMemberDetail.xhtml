@@ -15,16 +15,6 @@
             <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
             <h:outputText value=" "/>
             <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
-            <h:outputText value=" "/>
-            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{staffMemberController.editSetup}" value="#{bundle.ViewStaffMemberEditButton}" >
-                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
-            </h:commandButton>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{staffMemberController.destroySetup}" value="#{bundle.ViewStaffMemberDestroyButton}">
-                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
-            </h:commandButton>
         </ui:define>
         <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
@@ -37,20 +27,20 @@
                 <h:outputText value="#{staffMemberController.staffMember.firstName}" title="#{bundle.ViewStaffMemberTitle_firstName}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_lastName}"/>
                 <h:outputText value="#{staffMemberController.staffMember.lastName}" title="#{bundle.ViewStaffMemberTitle_lastName}"/>
-                <h:outputText value="#{bundle.ViewStaffMemberLabel_street}"/>
+<!--            <h:outputText value="#{bundle.ViewStaffMemberLabel_street}"/>
                 <h:outputText value="#{staffMemberController.staffMember.street}" title="#{bundle.ViewStaffMemberTitle_street}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_zip}"/>
-                <h:outputText value="#{staffMemberController.staffMember.zip}" title="#{bundle.ViewStaffMemberTitle_zip}"/>
+                <h:outputText value="#{staffMemberController.staffMember.zip}" title="#{bundle.ViewStaffMemberTitle_zip}"/>-->
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_city}"/>
                 <h:outputText value="#{staffMemberController.staffMember.city}" title="#{bundle.ViewStaffMemberTitle_city}"/>
-                <h:outputText value="#{bundle.ViewStaffMemberLabel_mailAddress}"/>
+<!--            <h:outputText value="#{bundle.ViewStaffMemberLabel_mailAddress}"/>
                 <h:outputText value="#{staffMemberController.staffMember.mailAddress}" title="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_phoneNr}"/>
                 <h:outputText value="#{staffMemberController.staffMember.phoneNr}" title="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_cellPhoneNr}"/>
                 <h:outputText value="#{staffMemberController.staffMember.cellPhoneNr}" title="#{bundle.ViewStaffMemberTitle_cellPhoneNr}"/>
                 <h:outputLabel value="#{bundle.ViewStaffMemberLabel_remarks}" for="remarks" styleClass="no-print"/>
-                <h:inputTextarea readonly="true" rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.ViewStaffMemberTitle_remarks}" styleClass="no-print" />
+                <h:inputTextarea readonly="true" rows="3" cols="120" id="remarks" value="#{staffMemberController.staffMember.remarks}" title="#{bundle.ViewStaffMemberTitle_remarks}" styleClass="no-print" />-->
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ViewStaffMemberLabel_shifts}"/>

@@ -19,16 +19,6 @@
             <h:commandButton action="#{locationController.detailSetup}" value="#{bundle.ViewShiftBackButton}" >
                 <f:param name="jsfcrud.currentLocation" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift.location][locationController.converter].jsfcrud_invoke}"/>
             </h:commandButton>
-            <h:outputText value=" "/>
-            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{shiftController.editSetup}" value="#{bundle.ViewShiftEditButton}" >
-                <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}"/>
-            </h:commandButton>
-            <h:outputText value=" "/>
-            <h:commandButton action="#{shiftController.destroySetup}" value="#{bundle.ViewShiftDestroyButton}">
-                <f:param name="jsfcrud.currentShift" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][shiftController.shift][shiftController.converter].jsfcrud_invoke}" />
-            </h:commandButton>
         </ui:define>
 
         <ui:define name="content">
@@ -48,9 +38,10 @@
                 <h:outputText value="#{shiftController.shift.endTime}" title="#{bundle.ViewShiftTitle_endTime}">
                     <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternOut}" />
                 </h:outputText>
-                <h:outputLabel value="#{bundle.ViewShiftLabel_numberOfStaffMembers}" />
+
+<!--            <h:outputLabel value="#{bundle.ViewShiftLabel_numberOfStaffMembers}" />
                 <h:outputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.ViewShiftTitle_numberOfStaffMembers}"/>
-                <h:outputText value="&nbsp;"/>
+                <h:outputText value="&nbsp;"/>-->
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="#{bundle.ShiftLabel_responsible}"/>
                 <h:outputText value="#{shiftController.shift.responsible.lastName} #{shiftController.shift.responsible.firstName} #{shiftController.shift.responsible.city}" title="#{bundle.ShiftTitle_responsible}"/>
@@ -78,7 +69,7 @@
                             </f:facet>
                             <h:outputText value="#{item.firstName}"/>
                         </h:column>
-                        <h:column>
+<!--                    <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_street}"/>
                             </f:facet>
@@ -89,7 +80,7 @@
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_zip}"/>
                             </f:facet>
                             <h:outputText value="#{item.zip}"/>
-                        </h:column>
+                        </h:column>-->
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_city}"/>
@@ -101,7 +92,7 @@
                                  <h:outputText value="#{bundle.ViewStaffMemberTitle_mailAddress}"/>
                              </f:facet>
                              <h:outputText value="#{item.mailAddress}"/>
-                         </h:column>-->
+                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ViewStaffMemberTitle_phoneNr}"/>
@@ -114,6 +105,7 @@
                             </f:facet>
                             <h:outputText value="#{item.cellPhoneNr}"/>
                         </h:column>
+                        -->
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
