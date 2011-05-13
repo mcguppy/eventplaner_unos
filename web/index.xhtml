@@ -19,6 +19,8 @@
             <br />
             <br />
             <h:commandButton value="#{bundle.statusButton}" action="/pages/status/statusIndex" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton value="#{bundle.shiftPlanButton}" action="#{reportingController.createShiftPlan}"  />
         </ui:define>
         <ui:define name="content" />
     </ui:composition>
