@@ -41,7 +41,7 @@ public class ReportingController {
         jpaController = (StaffMemberJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "staffMemberJpa");
     }
     private StaffMemberJpaController jpaController = null;
-    public static final String RESULT = "Z:/tmp/shift_plan_1.pdf";
+    public static final String RESULT = "Z:/tmp/shift_plan.pdf";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     private static Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
@@ -72,11 +72,11 @@ public class ReportingController {
 
         List<StaffMember> staffMembers = jpaController.findStaffMemberEntities();
         Collections.sort(staffMembers);
-        // a staffMemberTable with three columns
         PdfPTable staffMemberTable = null;
-        // the cell object
-        PdfPCell cell;
         for (StaffMember staffMember : staffMembers) {
+            if (staffMember.getShifts().isEmpty()) {
+                continue;
+            }
 
             // preface
             Paragraph preface = new Paragraph();
