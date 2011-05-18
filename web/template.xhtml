@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
-        <link type="text/css" rel="stylesheet" href="/eventplaner/faces/javax.faces.resource/css/jsfcrud_print.css" media="print" />
+        <!--        <link type="text/css" rel="stylesheet" href="/eventplaner/faces/javax.faces.resource/css/jsfcrud_print.css" media="print" />-->
     </h:head>
 
     <h:body>
@@ -25,6 +25,11 @@
                     <ui:insert name="content" >Default Content</ui:insert>
                 </div>
             </h:form>
+            <h:panelGroup id="footer" layout="block">
+                &copy; 2011 TPV «Echo vom Kastell» Zeneggen
+                <br/>
+                <br/>powered by Stefan Meichtry, Törbel
+            </h:panelGroup>
         </div>
     </h:body>
 </html>
