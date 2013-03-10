@@ -59,6 +59,16 @@ tr.jsfcrud_even_row {
     color: #4e6a71;
 }
 
+#footer {
+    text-align: center;
+    padding: 8px;
+    margin: 8px;
+    border-top: 1px solid #898989;
+    clear : both;
+    color: #4e6a71
+}
+
+
 #busyImage {
     position: absolute;
     left: 50%;
