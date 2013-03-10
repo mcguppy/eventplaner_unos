@@ -1,8 +1,6 @@
 package org.mcguppy.eventplaner.reporting.controller;
 
-import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -10,12 +8,11 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -24,6 +21,7 @@ import java.util.Locale;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
@@ -37,26 +35,33 @@ import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 public class ReportingController {
 
     public ReportingController() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext = FacesContext.getCurrentInstance();
         jpaController = (StaffMemberJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "staffMemberJpa");
     }
     private StaffMemberJpaController jpaController = null;
-    public static final String RESULT = "Z:/tmp/shift_plan.pdf";
+    private FacesContext facesContext = null;
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     private static Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
     private static Font smallNormal = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL);
 
     // TODO: exception handling
-    public String createShiftPlan() throws DocumentException, FileNotFoundException {
+    public String createShiftPlan() throws DocumentException, FileNotFoundException, IOException {
 
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(RESULT));
+
+        //FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=\"schichtplan.pdf\"");
+        PdfWriter.getInstance(document, response.getOutputStream());
+
         document.open();
         addMetaData(document);
         addContent(document);
         document.close();
-
+        
+        facesContext.responseComplete();
         return "schiftPlanCreated";
     }
 
