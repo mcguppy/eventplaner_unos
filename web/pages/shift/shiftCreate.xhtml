@@ -28,21 +28,18 @@
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{bundle.CreateShiftLabel_location}" />
                 <h:outputText value="#{shiftController.shift.location.locationName}" title="#{bundle.CreateShiftTitle_location}"/>
-                <h:outputText value="#{bundle.CreateShiftLabel_description}"/>
+                <h:outputLabel value="#{bundle.CreateShiftLabel_description}"/>
                 <h:outputText value="#{shiftController.shift.location.description}" title="#{bundle.CreateShiftTitle_description}"/>
                 <h:outputLabel value="#{bundle.CreateShiftLabel_startTime}" for="startTime" />
-                <p:calendar id="startTime" value="#{shiftController.shift.startTime}" pattern="#{bundle.DateTimePatternIn}" locale="#{bundle.Locale}" timeZone="#{bundle.DateTimeTimeZone}" title="#{bundle.CreateShiftTitle_startTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_startTime}" />
-<!--                <h:inputText id="startTime" value="#{shiftController.shift.startTime}" title="#{bundle.CreateShiftTitle_startTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_startTime}">
-                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternIn}" />
-                </h:inputText>-->
+                <p:calendar id="startTime" value="#{shiftController.shift.startTime}" pattern="#{bundle.DateTimePatternIn}" locale="de" timeZone="#{bundle.DateTimeTimeZone}" title="#{bundle.CreateShiftTitle_startTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_startTime}" mode="popup" showOn="button" navigator="true" stepMinute="5"/>
                 <h:outputLabel value="#{bundle.CreateShiftLabel_endTime}" for="endTime" />
-                <h:inputText id="endTime" value="#{shiftController.shift.endTime}" title="#{bundle.CreateShiftTitle_endTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_endTime}">
-                    <f:convertDateTime timeZone="#{bundle.DateTimeTimeZone}" pattern="#{bundle.DateTimePatternIn}" />
-                </h:inputText>
+                <p:calendar id="endTime" value="#{shiftController.shift.endTime}" pattern="#{bundle.DateTimePatternIn}" locale="de" timeZone="#{bundle.DateTimeTimeZone}" title="#{bundle.CreateShiftTitle_endTime}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_endTime}" mode="popup" showOn="button"  navigator="true" stepMinute="5" />
                 <h:outputLabel value="#{bundle.CreateShiftLabel_numberOfStaffMembers}" />
                 <h:inputText value="#{shiftController.shift.numberOfStaffMembers}" title="#{bundle.CreateShiftTitle_numberOfStaffMembers}" required="true" requiredMessage="#{bundle.CreateShiftRequiredMessage_numberOfStaffMembers}"/>
+
                 <h:outputText value="&nbsp;"/>
                 <h:outputText value="&nbsp;"/>
+
                 <h:outputText value="#{bundle.CreateShiftLabel_staffMembers}"/>
                 <h:panelGroup>
                     <h:selectManyCheckbox id="staffMemberCollection" value="#{shiftController.shift.staffMembers}" layout="pageDirection" converter="#{staffMemberController.converter}">
