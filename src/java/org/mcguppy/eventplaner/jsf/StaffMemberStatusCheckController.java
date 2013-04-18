@@ -56,7 +56,7 @@ public class StaffMemberStatusCheckController {
     }
 
     public List<StaffMember> getStaffMemberItemsWithShortestTimeBetweenShifts() {
-        int numberOfItems = 50;
+        int numberOfItems = 150;
         calculateMinShiftDeltaTime();
         Collections.sort(staffMemberItems, new StaffMemberShiftDeltaTimeComperator());
         List<StaffMember> staffMemberItemsWithShortestTimeBetweenShifts = new ArrayList<StaffMember>();

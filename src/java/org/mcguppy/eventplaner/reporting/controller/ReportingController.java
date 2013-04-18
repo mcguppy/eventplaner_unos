@@ -60,7 +60,7 @@ public class ReportingController {
         addMetaData(document);
         addContent(document);
         document.close();
-        
+
         facesContext.responseComplete();
         return "schiftPlanCreated";
     }
@@ -86,7 +86,7 @@ public class ReportingController {
             // preface
             Paragraph preface = new Paragraph();
             addEmptyLine(preface, 1);
-            preface.add(new Paragraph("eventplaner", catFont));
+            preface.add(new Paragraph("Einsatzplan", catFont));
             addEmptyLine(preface, 1);
             document.add(preface);
 
@@ -129,17 +129,17 @@ public class ReportingController {
             addEmptyLine(shiftDataSection, 1);
             document.add(shiftDataSection);
 
-            PdfPTable shiftTable = new PdfPTable(new float[]{20, 25, 18, 18, 25});
+            PdfPTable shiftTable = new PdfPTable(new float[]{28, 14, 14, 30});
 
             PdfPCell c1 = new PdfPCell(new Phrase("Standort", tableHeadFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
             shiftTable.addCell(c1);
 
-            PdfPCell c2 = new PdfPCell(new Phrase("Beschreibung", tableHeadFont));
-            c2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            shiftTable.addCell(c2);
+//            PdfPCell c2 = new PdfPCell(new Phrase("Beschreibung", tableHeadFont));
+//            c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+//            shiftTable.addCell(c2);
 
             PdfPCell c3 = new PdfPCell(new Phrase("Start", tableHeadFont));
             c3.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -155,13 +155,13 @@ public class ReportingController {
             c5.setHorizontalAlignment(Element.ALIGN_CENTER);
             c5.setBackgroundColor(BaseColor.LIGHT_GRAY);
             shiftTable.addCell(c5);
-            
+
             List<Shift> shifts = (List<Shift>) staffMember.getShifts();
             Collections.sort(shifts);
 
             for (Shift shift : shifts) {
                 shiftTable.addCell(new Paragraph(shift.getLocation().getLocationName(), smallNormal));
-                shiftTable.addCell(new Paragraph(shift.getLocation().getDescription(), smallNormal));
+//                shiftTable.addCell(new Paragraph(shift.getLocation().getDescription(), smallNormal));
 
                 SimpleDateFormat formatter = new SimpleDateFormat("E. dd.MM.yyyy HH:mm", Locale.GERMAN);
 
@@ -174,10 +174,20 @@ public class ReportingController {
 
                 shiftTable.addCell(new Paragraph(startTimeString, smallNormal));
                 shiftTable.addCell(new Paragraph(endTimeString, smallNormal));
+
+
+
                 if (shift.getResponsible() == null) {
                     shiftTable.addCell(new Paragraph("", smallNormal));
                 } else {
-                    shiftTable.addCell(new Paragraph(shift.getResponsible().toString(), smallNormal));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append(shift.getResponsible());
+                    stringBuilder.append(" ");
+                    if (shift.getResponsible().getCellPhoneNr() != null && shift.getResponsible().getCellPhoneNr() != "") {
+                        stringBuilder.append("\n");
+                        stringBuilder.append(shift.getResponsible().getCellPhoneNr());
+                    }
+                    shiftTable.addCell(new Paragraph(stringBuilder.toString(), smallNormal));
                 }
             }
 
