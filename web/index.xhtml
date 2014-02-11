@@ -22,7 +22,9 @@
             <h:outputText value=" "/>
             <h:commandButton value="#{bundle.shiftPlanButton}" action="#{reportingController.createShiftPlan}"  />
         </ui:define>
-        <ui:define name="content" />
+        <ui:define name="content">
+            <h:graphicImage style="margin-left:30%" value="#{resource['images:logo.jpg']}" height="500"  />
+        </ui:define>
     </ui:composition>
 </html>
 
