@@ -26,9 +26,9 @@
                 </div>
             </h:form>
             <h:panelGroup id="footer" layout="block">
-                &copy; 2013 by TPV Bürchen
+                &copy; <h:outputText value="#{bundle.Copyright}"></h:outputText>
                 <br/>
-                <br/>powered by Stefan Meichtry, Törbel
+                <br/><h:outputText value="#{bundle.PoweredBy}"></h:outputText>
             </h:panelGroup>
 
         </div>
