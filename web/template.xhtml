@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
-        <!--        <link type="text/css" rel="stylesheet" href="/eventplaner/faces/javax.faces.resource/css/jsfcrud_print.css" media="print" />-->
+        <link type="text/css" rel="stylesheet" href="/eventplaner/faces/javax.faces.resource/css/jsfcrud_print.css" media="print" />
     </h:head>
 
     <h:body>
@@ -26,10 +26,11 @@
                 </div>
             </h:form>
             <h:panelGroup id="footer" layout="block">
-               &copy; 2013 by TPV «Gestelnburg» Niedergesteln
+                &copy; <h:outputText value="#{bundle.Copyright}"></h:outputText>
                 <br/>
-               <br/>powered by Stefan Meichtry, Törbel
+                <br/><h:outputText value="#{bundle.PoweredBy}"></h:outputText>
             </h:panelGroup>
+
         </div>
     </h:body>
 </html>
