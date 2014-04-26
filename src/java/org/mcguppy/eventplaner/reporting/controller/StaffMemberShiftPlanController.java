@@ -33,28 +33,28 @@ import org.mcguppy.eventplaner.jpa.entities.StaffMember;
  */
 @Named
 @RequestScoped
-public class ReportingController {
+public class StaffMemberShiftPlanController {
 
-    public ReportingController() {
+    public StaffMemberShiftPlanController() {
         facesContext = FacesContext.getCurrentInstance();
         jpaController = (StaffMemberJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "staffMemberJpa");
     }
     private StaffMemberJpaController jpaController = null;
     private FacesContext facesContext = null;
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
-    private static Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
-    private static Font smallNormal = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL);
+    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+    private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
+    private static final Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
+    private static final Font smallNormal = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL);
 
     // TODO: exception handling
-    public String createShiftPlan() throws DocumentException, FileNotFoundException, IOException {
+    public String createShiftPlanForStaffmembers() throws DocumentException, FileNotFoundException, IOException {
 
         Document document = new Document();
         document.setPageSize(PageSize.A4.rotate());     // landscape format
         
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=\"schichtplan.pdf\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"personal_schichtplan.pdf\"");
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
@@ -67,9 +67,9 @@ public class ReportingController {
     }
 
     private void addMetaData(Document document) {
-        document.addTitle("Schichtplan");
-        document.addSubject("Schichtplan für den Event");
-        document.addKeywords("Event, PDF, Plan");
+        document.addTitle("Personal-Schichtplan");
+        document.addSubject("Personal-Schichtplan für den Event");
+        document.addKeywords("Event, PDF, Plan, Personal, Helfer, Staff");
         document.addAuthor("Stefan Meichtry");
         document.addCreator("Stefan Meichtry");
     }
