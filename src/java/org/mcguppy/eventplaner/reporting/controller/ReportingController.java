@@ -5,6 +5,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -49,7 +50,8 @@ public class ReportingController {
     public String createShiftPlan() throws DocumentException, FileNotFoundException, IOException {
 
         Document document = new Document();
-
+        document.setPageSize(PageSize.A4.rotate());     // landscape format
+        
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=\"schichtplan.pdf\"");
