@@ -208,9 +208,4 @@ public class LocationController {
     public Converter getConverter() {
         return converter;
     }
-
-    public SelectItem[] getTitlesAvailableSelectOne() {
-        List<Title> titleList = Arrays.asList(Title.values());
-        return JsfUtil.getSelectItems(titleList, true);
-    }
 }

@@ -32,6 +32,18 @@ public class StaffMember implements Serializable, Comparable {
         Herr,
         Frau;
     }
+    public enum Shirt {
+        GR_140,
+        GR_152,
+        GR_164,
+        XS,
+        S,
+        M,
+        L,
+        XL,
+        XXL,
+        XXXL;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,6 +62,8 @@ public class StaffMember implements Serializable, Comparable {
     private String phoneNr;
     private String cellPhoneNr;
     private String mailAddress;
+    @Enumerated(EnumType.STRING)
+    private Shirt shirt;
     @Lob
     @Basic(fetch = FetchType.EAGER)
     private String remarks;
@@ -138,6 +152,14 @@ public class StaffMember implements Serializable, Comparable {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public Shirt getShirt() {
+        return shirt;
+    }
+
+    public void setShirt(Shirt shirt) {
+        this.shirt = shirt;
     }
 
     public String getRemarks() {

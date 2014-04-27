@@ -24,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import org.mcguppy.eventplaner.jpa.controllers.ShiftJpaController;
-import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 
@@ -190,7 +189,11 @@ public class InfoPointShiftPlanController {
                 staffMemberTable.addCell(new Paragraph(staffMemeber.getTitle().toString(), smallNormal));
                 staffMemberTable.addCell(new Paragraph(staffMemeber.getLastName(), smallNormal));
                 staffMemberTable.addCell(new Paragraph(staffMemeber.getFirstName(), smallNormal));
-                staffMemberTable.addCell(new Paragraph("", smallNormal));   // placeholder for t-shirt
+                if (null != staffMemeber.getShirt()) {
+                    staffMemberTable.addCell(new Paragraph(staffMemeber.getShirt().toString(), smallNormal));
+                } else {
+                    staffMemberTable.addCell(new Paragraph("", smallNormal));
+                }
                 staffMemberTable.addCell(new Paragraph(staffMemeber.getStreet(), smallNormal));
                 staffMemberTable.addCell(new Paragraph(staffMemeber.getZip(), smallNormal));
                 staffMemberTable.addCell(new Paragraph(staffMemeber.getCity(), smallNormal));

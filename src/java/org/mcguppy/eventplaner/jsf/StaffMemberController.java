@@ -16,6 +16,7 @@ import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.controllers.exceptions.NonexistentEntityException;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
+import org.mcguppy.eventplaner.jpa.entities.StaffMember.Shirt;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember.Title;
 import org.mcguppy.eventplaner.jsf.util.JsfUtil;
 
@@ -230,5 +231,9 @@ public class StaffMemberController {
     public SelectItem[] getTitlesAvailableSelectOne() {
         List<Title> titleList = Arrays.asList(Title.values());
         return JsfUtil.getSelectItems(titleList, true);
+    }
+    public SelectItem[] getShirtsAvailableSelectOne() {
+        List<Shirt> shirtList = Arrays.asList(Shirt.values());
+        return JsfUtil.getSelectItems(shirtList, true);
     }
 }

@@ -39,6 +39,10 @@
                 <h:inputText id="zip" value="#{staffMemberController.staffMember.zip}" title="#{bundle.CreateStaffMemberTitle_zip}" required="true" requiredMessage="#{bundle.CreateStaffMemberRequiredMessage_zip}"/>
                 <h:outputLabel value="#{bundle.CreateStaffMemberLabel_city}" for="city" />
                 <h:inputText id="city" value="#{staffMemberController.staffMember.city}" title="#{bundle.CreateStaffMemberTitle_city}" required="true" requiredMessage="#{bundle.CreateStaffMemberRequiredMessage_city}"/>
+                <h:outputLabel value="#{bundle.CreateStaffMemberLabel_shirt}" for="shirt" />
+                <h:selectOneMenu id="shirt" value="#{staffMemberController.staffMember.shirt}" title="#{bundle.CreateStaffMemberTitle_shirt}" >
+                    <f:selectItems value="#{staffMemberController.shirtsAvailableSelectOne}"/>
+                </h:selectOneMenu>
                 <h:outputLabel value="#{bundle.CreateStaffMemberLabel_mailAddress}" for="mailAddress" />
                 <h:inputText id="mailAddress" value="#{staffMemberController.staffMember.mailAddress}" title="#{bundle.CreateStaffMemberTitle_mailAddress}" />
                 <h:outputLabel value="#{bundle.CreateStaffMemberLabel_phoneNr}" for="phoneNr" />
