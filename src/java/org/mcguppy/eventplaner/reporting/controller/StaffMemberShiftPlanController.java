@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -26,6 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
 import org.mcguppy.eventplaner.jpa.entities.StaffMember;
+import org.mcguppy.eventplaner.jsf.StaffMemberConverter;
+import org.mcguppy.eventplaner.jsf.util.JsfUtil;
 
 /**
  *
@@ -51,7 +54,7 @@ public class StaffMemberShiftPlanController {
 
         Document document = new Document();
         document.setPageSize(PageSize.A4.rotate());     // landscape format
-        
+
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=\"personal_schichtplan.pdf\"");
@@ -59,9 +62,35 @@ public class StaffMemberShiftPlanController {
 
         document.open();
         addMetaData(document);
-        addContent(document);
+        addContentOfAllStaffMembers(document);
         document.close();
-        
+
+        facesContext.responseComplete();
+        return "schiftPlanCreated";
+    }
+
+    public String createShiftPlanForSelectedStaffmember() throws DocumentException, FileNotFoundException, IOException {
+
+        StaffMemberConverter converter = new StaffMemberConverter();
+        StaffMember staffMember = (StaffMember) JsfUtil.getObjectFromRequestParameter("jsfcrud.currentStaffMember", converter, null);
+        // TODO: Exception Handling
+        if (null == staffMember) {
+            return "Error";
+        }
+
+        Document document = new Document();
+        document.setPageSize(PageSize.A4.rotate());     // landscape format
+
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=\"schichtplan_" + staffMember.getLastName() + "_" + staffMember.getFirstName() + "_" + staffMember.getCity() + ".pdf\"");
+        PdfWriter.getInstance(document, response.getOutputStream());
+
+        document.open();
+        addMetaData(document);
+        addContentOfSelectedStaffMember(document, staffMember);
+        document.close();
+
         facesContext.responseComplete();
         return "schiftPlanCreated";
     }
@@ -74,7 +103,7 @@ public class StaffMemberShiftPlanController {
         document.addCreator("Stefan Meichtry");
     }
 
-    private void addContent(Document document) throws DocumentException {
+    private void addContentOfAllStaffMembers(Document document) throws DocumentException {
 
         List<StaffMember> staffMembers = jpaController.findStaffMemberEntities();
         Collections.sort(staffMembers);
@@ -120,7 +149,6 @@ public class StaffMemberShiftPlanController {
             staffMemberTable.addCell(new Paragraph("Natel Nummer:", smallNormal));
             staffMemberTable.addCell(new Paragraph(staffMember.getCellPhoneNr(), smallNormal));
 
-
             document.add(staffMemberTable);
 
             // shift Data
@@ -156,7 +184,7 @@ public class StaffMemberShiftPlanController {
             c5.setHorizontalAlignment(Element.ALIGN_CENTER);
             c5.setBackgroundColor(BaseColor.LIGHT_GRAY);
             shiftTable.addCell(c5);
-            
+
             List<Shift> shifts = (List<Shift>) staffMember.getShifts();
             Collections.sort(shifts);
 
@@ -172,7 +200,6 @@ public class StaffMemberShiftPlanController {
                 String startTimeString = formatter.format(startTime);
                 String endTimeString = formatter.format(endTime);
 
-
                 shiftTable.addCell(new Paragraph(startTimeString, smallNormal));
                 shiftTable.addCell(new Paragraph(endTimeString, smallNormal));
                 if (shift.getResponsible() == null) {
@@ -186,9 +213,109 @@ public class StaffMemberShiftPlanController {
 
             document.newPage();
 
-
-
         }
+    }
+
+    private void addContentOfSelectedStaffMember(Document document, StaffMember staffMember) throws DocumentException {
+
+        PdfPTable staffMemberTable = null;
+
+        // preface
+        Paragraph preface = new Paragraph();
+        addEmptyLine(preface, 1);
+        preface.add(new Paragraph("eventplaner", catFont));
+        addEmptyLine(preface, 1);
+        document.add(preface);
+
+        // staffMember Data
+        Paragraph staffMemberDataSection = new Paragraph();
+        addEmptyLine(staffMemberDataSection, 1);
+        staffMemberDataSection.add(new Paragraph("Personen-Daten:", subFont));
+        addEmptyLine(staffMemberDataSection, 1);
+        document.add(staffMemberDataSection);
+
+        staffMemberTable = new PdfPTable(new float[]{15, 40});
+        staffMemberTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+
+        staffMemberTable.addCell(new Paragraph("Anrede:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getTitle().toString(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Vorname:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getFirstName(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Name:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getLastName(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Strasse:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getStreet(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("PLZ:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getZip(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Ort:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getCity(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Mailadresse:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getMailAddress(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Telefon Nummer:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getPhoneNr(), smallNormal));
+        staffMemberTable.addCell(new Paragraph("Natel Nummer:", smallNormal));
+        staffMemberTable.addCell(new Paragraph(staffMember.getCellPhoneNr(), smallNormal));
+
+        document.add(staffMemberTable);
+
+        // shift Data
+        Paragraph shiftDataSection = new Paragraph();
+        addEmptyLine(shiftDataSection, 1);
+        shiftDataSection.add(new Paragraph("Schicht-Daten:", subFont));
+        addEmptyLine(shiftDataSection, 1);
+        document.add(shiftDataSection);
+
+        PdfPTable shiftTable = new PdfPTable(new float[]{20, 25, 18, 18, 25});
+
+        PdfPCell c1 = new PdfPCell(new Phrase("Standort", tableHeadFont));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        shiftTable.addCell(c1);
+
+        PdfPCell c2 = new PdfPCell(new Phrase("Beschreibung", tableHeadFont));
+        c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        shiftTable.addCell(c2);
+
+        PdfPCell c3 = new PdfPCell(new Phrase("Start", tableHeadFont));
+        c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c3.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        shiftTable.addCell(c3);
+
+        PdfPCell c4 = new PdfPCell(new Phrase("Ende", tableHeadFont));
+        c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c4.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        shiftTable.addCell(c4);
+
+        PdfPCell c5 = new PdfPCell(new Phrase("Schicht-Verantwortung", tableHeadFont));
+        c5.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c5.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        shiftTable.addCell(c5);
+
+        List<Shift> shifts = (List<Shift>) staffMember.getShifts();
+        Collections.sort(shifts);
+
+        for (Shift shift : staffMember.getShifts()) {
+            shiftTable.addCell(new Paragraph(shift.getLocation().getLocationName(), smallNormal));
+            shiftTable.addCell(new Paragraph(shift.getLocation().getDescription(), smallNormal));
+
+            SimpleDateFormat formatter = new SimpleDateFormat("E. dd.MM.yyyy HH:mm", Locale.GERMAN);
+
+            Date startTime = shift.getStartTime();
+            Date endTime = shift.getEndTime();
+
+            String startTimeString = formatter.format(startTime);
+            String endTimeString = formatter.format(endTime);
+
+            shiftTable.addCell(new Paragraph(startTimeString, smallNormal));
+            shiftTable.addCell(new Paragraph(endTimeString, smallNormal));
+            if (shift.getResponsible() == null) {
+                shiftTable.addCell(new Paragraph("", smallNormal));
+            } else {
+                shiftTable.addCell(new Paragraph(shift.getResponsible().toString(), smallNormal));
+            }
+        }
+        document.add(shiftTable);
     }
 
     private static void addEmptyLine(Paragraph paragraph, int number) {

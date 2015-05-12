@@ -18,6 +18,9 @@
             <h:outputText value=" "/>
             <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
             <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberShiftPlanController.createShiftPlanForSelectedStaffmember()}" value="#{bundle.PdfReportButton}" >
+                <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
+            </h:commandButton>
             <h:commandButton action="#{staffMemberController.editSetup}" value="#{bundle.ViewStaffMemberEditButton}" >
                 <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][staffMemberController.staffMember][staffMemberController.converter].jsfcrud_invoke}" />
             </h:commandButton>
