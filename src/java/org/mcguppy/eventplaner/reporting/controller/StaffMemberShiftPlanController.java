@@ -160,7 +160,7 @@ public class StaffMemberShiftPlanController {
             List<Shift> shifts = (List<Shift>) staffMember.getShifts();
             Collections.sort(shifts);
 
-            for (Shift shift : staffMember.getShifts()) {
+            for (Shift shift : shifts) {
                 shiftTable.addCell(new Paragraph(shift.getLocation().getLocationName(), smallNormal));
                 shiftTable.addCell(new Paragraph(shift.getLocation().getDescription(), smallNormal));
 

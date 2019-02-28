@@ -19,8 +19,10 @@
             <br />
             <br />
             <h:commandButton value="#{bundle.staffMemberShiftPlanButton}" action="#{staffMemberShiftPlanController.createShiftPlanForStaffmembers()}"  />
-            <h:outputText value=" "/>
+            <h:outputText value=" " escape="false" />
             <h:commandButton value="#{bundle.infoPointShiftPlanButton}" action="#{infoPointShiftPlanController.createShiftPlanForInfoPoint()}"  />
+            <h:outputText value=" " escape="false" />
+            <h:commandButton value="#{bundle.locationShiftOverviewButton}" action="#{locationShiftOverviewController.createLocationShiftOverview()}"  />
         </ui:define>
         <ui:define name="content" />
     </ui:composition>
