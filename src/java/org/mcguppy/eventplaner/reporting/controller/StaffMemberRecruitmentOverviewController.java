@@ -25,8 +25,10 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import org.mcguppy.eventplaner.jpa.controllers.LocationJpaController;
 import org.mcguppy.eventplaner.jpa.controllers.ShiftJpaController;
+import org.mcguppy.eventplaner.jpa.controllers.StaffMemberJpaController;
 import org.mcguppy.eventplaner.jpa.entities.Location;
 import org.mcguppy.eventplaner.jpa.entities.Shift;
+import org.mcguppy.eventplaner.jpa.entities.StaffMember;
 
 /**
  *
@@ -34,30 +36,37 @@ import org.mcguppy.eventplaner.jpa.entities.Shift;
  */
 @Named
 @RequestScoped
-public class LocationShiftOverviewController {
+public class StaffMemberRecruitmentOverviewController {
 
-    public LocationShiftOverviewController() {
+    public StaffMemberRecruitmentOverviewController() {
         facesContext = FacesContext.getCurrentInstance();
         locationJpaController = (LocationJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "locationJpa");
         shiftJpaController = (ShiftJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "shiftJpa");
+        staffMemberJpaController = (StaffMemberJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "staffMemberJpa");
+        dateString = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        dateStringHuman = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(new Date());
     }
-    private LocationJpaController locationJpaController = null;
-    private ShiftJpaController shiftJpaController = null;
-    private FacesContext facesContext = null;
+    private LocationJpaController locationJpaController;
+    private ShiftJpaController shiftJpaController;
+    private StaffMemberJpaController staffMemberJpaController;
+    private FacesContext facesContext;
+    private String dateString;
+    private String dateStringHuman;
+    
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     private static final Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
     private static final Font smallNormal = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL);
 
     // TODO: exception handling
-    public String createLocationShiftOverview() throws DocumentException, FileNotFoundException, IOException {
+    public String createStaffMemberRecruitmentOverview() throws DocumentException, FileNotFoundException, IOException {
 
         Document document = new Document();
         document.setPageSize(PageSize.A4.rotate());     // landscape format
 
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=\"standort_schicht_report.pdf\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"personal-rekrutierungs-uebersicht_" + dateString + ".pdf\"");
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
@@ -70,8 +79,8 @@ public class LocationShiftOverviewController {
     }
 
     private void addMetaData(Document document) {
-        document.addTitle("Standort-Schicht Report");
-        document.addSubject("Standort-Schicht Report für den Event");
+        document.addTitle("Personal-Rekrutierungs-Übersicht " + dateString);
+        document.addSubject("Personal-Rekrutierungs-Übersicht " + dateString + " für den Event");
         document.addKeywords("Event, PDF, Plan, Personal, Helfer, Staff");
         document.addAuthor("Stefan Meichtry");
         document.addCreator("Stefan Meichtry");
@@ -79,16 +88,21 @@ public class LocationShiftOverviewController {
 
     private void addContent(Document document) throws DocumentException {
         // load location data
-        List<Location> locations = locationJpaController.findLocationEntities();
-        Collections.sort(locations);
+        List<Location> allLocations = locationJpaController.findLocationEntities();
+        Collections.sort(allLocations);
         
-        // load all shiftn data
+        // load all shift data
         List<Shift> allShifts = shiftJpaController.findShiftEntities();
+        
+        // load all staffMember data
+        List<StaffMember> allStaffMembers = staffMemberJpaController.findStaffMemberEntities();
         
         // summary page first
         Paragraph summaryPreface = new Paragraph();
         addEmptyLine(summaryPreface, 1);
-        summaryPreface.add(new Paragraph("eventplaner: Standort-Schicht Report - Zusammenfassung", catFont));
+        summaryPreface.add(new Paragraph("eventplaner: Personal-Rekrutierungs-Übersicht - Zusammenfassung", catFont));
+        addEmptyLine(summaryPreface, 1);
+        summaryPreface.add(new Paragraph("generiert: " + dateStringHuman, smallNormal));
         addEmptyLine(summaryPreface, 1);
         document.add(summaryPreface);
         
@@ -100,17 +114,19 @@ public class LocationShiftOverviewController {
             totalEventShiftStaffmemberCurrent += shift.getStaffMembersSize();
         }
 
-        PdfPTable summaryTable = new PdfPTable(new float[]{15, 40});
+        PdfPTable summaryTable = new PdfPTable(new float[]{50, 40});
         summaryTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
-        summaryTable.addCell(new Paragraph("Event Total Standorte:", smallNormal));
-        summaryTable.addCell(new Paragraph(Integer.toString(locations.size()), smallNormal));
-        summaryTable.addCell(new Paragraph("Event Total Schichten:", smallNormal));
-        summaryTable.addCell(new Paragraph(Integer.toString(allShifts.size()), smallNormal));        
-        summaryTable.addCell(new Paragraph("Event Total Schicht Personen Soll-Bestand:", smallNormal));
-        summaryTable.addCell(new Paragraph(Integer.toString(totalEventShiftStaffmemberRequired), smallNormal));
-        summaryTable.addCell(new Paragraph("Event Total Schicht Personen Ist-Bestand:", smallNormal));
-        summaryTable.addCell(new Paragraph(Integer.toString(totalEventShiftStaffmemberCurrent), smallNormal));
+        summaryTable.addCell(new Paragraph("Event Total Personen:", subFont));
+        summaryTable.addCell(new Paragraph(Integer.toString(allStaffMembers.size()), subFont));
+        summaryTable.addCell(new Paragraph("Event Total Standorte:", subFont));
+        summaryTable.addCell(new Paragraph(Integer.toString(allLocations.size()), subFont));
+        summaryTable.addCell(new Paragraph("Event Total Schichten:", subFont));
+        summaryTable.addCell(new Paragraph(Integer.toString(allShifts.size()), subFont));        
+        summaryTable.addCell(new Paragraph("Event Total Schicht Personen Soll-Bestand:", subFont));
+        summaryTable.addCell(new Paragraph(Integer.toString(totalEventShiftStaffmemberRequired), subFont));
+        summaryTable.addCell(new Paragraph("Event Total Schicht Personen Ist-Bestand:", subFont));
+        summaryTable.addCell(new Paragraph(Integer.toString(totalEventShiftStaffmemberCurrent), subFont));
 
         document.add(summaryTable);
 
@@ -118,12 +134,14 @@ public class LocationShiftOverviewController {
 
         // show detail of each location
         PdfPTable locationTable = null;
-        for (Location location : locations) {
+        for (Location location : allLocations) {
 
             // preface
             Paragraph preface = new Paragraph();
             addEmptyLine(preface, 1);
-            preface.add(new Paragraph("eventplaner: Standort Detail", catFont));
+            preface.add(new Paragraph("eventplaner: Personal-Rekrutierungs-Übersicht - Standort Detail", catFont));
+            addEmptyLine(preface, 1);
+            preface.add(new Paragraph("generiert: " + dateStringHuman, smallNormal));
             addEmptyLine(preface, 1);
             document.add(preface);
 
@@ -137,8 +155,8 @@ public class LocationShiftOverviewController {
             locationTable = new PdfPTable(new float[]{15, 40});
             locationTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
-            locationTable.addCell(new Paragraph("Standort Name:", smallNormal));
-            locationTable.addCell(new Paragraph(location.getLocationName(), smallNormal));
+            locationTable.addCell(new Paragraph("Standort Name:", subFont));
+            locationTable.addCell(new Paragraph(location.getLocationName(), subFont));
             locationTable.addCell(new Paragraph("Beschreibung:", smallNormal));
             locationTable.addCell(new Paragraph(location.getDescription(), smallNormal));
 

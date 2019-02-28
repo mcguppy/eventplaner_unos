@@ -38,9 +38,13 @@ public class InfoPointShiftPlanController {
     public InfoPointShiftPlanController() {
         facesContext = FacesContext.getCurrentInstance();
         jpaController = (ShiftJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "shiftJpa");
+        dateString = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        dateStringHuman = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(new Date());
     }
     private ShiftJpaController jpaController = null;
     private FacesContext facesContext = null;
+    private String dateString;
+    private String dateStringHuman;
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     private static final Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
@@ -54,7 +58,7 @@ public class InfoPointShiftPlanController {
 
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=\"info_point_schichtplan.pdf\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"info_point_schichtplan_" + dateString + ".pdf\"");
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
@@ -67,8 +71,8 @@ public class InfoPointShiftPlanController {
     }
 
     private void addMetaData(Document document) {
-        document.addTitle("Info-Point-Schichtplan");
-        document.addSubject("Info-Point-Schichtplan für den Event");
+        document.addTitle("Info-Point-Schichtplan " + dateString);
+        document.addSubject("Info-Point-Schichtplan " + dateString + " für den Event");
         document.addKeywords("Event, PDF, Plan, Info-Point");
         document.addAuthor("Stefan Meichtry");
         document.addCreator("Stefan Meichtry");

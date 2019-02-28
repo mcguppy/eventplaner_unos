@@ -38,9 +38,13 @@ public class StaffMemberShiftPlanController {
     public StaffMemberShiftPlanController() {
         facesContext = FacesContext.getCurrentInstance();
         jpaController = (StaffMemberJpaController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, "staffMemberJpa");
+        dateString = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        dateStringHuman = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(new Date());
     }
     private StaffMemberJpaController jpaController = null;
     private FacesContext facesContext = null;
+    private String dateString;
+    private String dateStringHuman;
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     private static final Font tableHeadFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
@@ -54,7 +58,7 @@ public class StaffMemberShiftPlanController {
         
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=\"personal_schichtplan.pdf\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"personal_schichtplan_" + dateString + ".pdf\"");
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
@@ -67,8 +71,8 @@ public class StaffMemberShiftPlanController {
     }
 
     private void addMetaData(Document document) {
-        document.addTitle("Personal-Schichtplan");
-        document.addSubject("Personal-Schichtplan für den Event");
+        document.addTitle("Personal-Schichtplan " + dateString);
+        document.addSubject("Personal-Schichtplan " + dateString + " für den Event");
         document.addKeywords("Event, PDF, Plan, Personal, Helfer, Staff");
         document.addAuthor("Stefan Meichtry");
         document.addCreator("Stefan Meichtry");
