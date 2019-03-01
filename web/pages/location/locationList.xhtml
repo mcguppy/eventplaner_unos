@@ -26,6 +26,11 @@
             </h:panelGroup>
             <h:outputText escape="false" value="#{bundle.ListLocationEmpty}" rendered="#{locationController.itemCount == 0}"/>
             <h:panelGroup rendered="#{locationController.itemCount > 0}">
+                <h:outputText value="Total definierte Standorte: #{locationController.itemCount}"/>
+                <br />
+                <h:outputText value="Total definierte Schichten: #{shiftController.itemCount}"/>
+                <br />
+                <br />
                 <h:dataTable value="#{locationController.locationItems}" var="item" border="0" cellpadding="2" cellspacing="0" width="900" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
                     <h:column>
                         <f:facet name="header">
