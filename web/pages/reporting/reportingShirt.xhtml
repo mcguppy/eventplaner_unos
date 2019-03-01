@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ApplicationName} - #{bundle.ReportingShirtPage}"></h:outputText>
+        </ui:define>
+        <ui:define name="navigation">
+            <h:commandButton value="#{bundle.IndexButton}" action="/index" immediate="true" />
+            <h:outputText value=" "/>
+            <h:commandButton action="#{staffMemberController.listSetup}" value="#{bundle.StaffMemberList}"/>
+            <h:outputText value=" "/>
+            <h:commandButton action="#{locationController.listSetup}" value="#{bundle.LocationList}"/>
+            <h:outputText value=" "/>
+            <input type="button" value="#{bundle.PrintButton}" onClick="window.print()"/>
+            <br />
+            <br />
+            <br />
+            <h:commandButton value="#{bundle.reportingButton}" action="/pages/reporting/reportingIndex" immediate="true" />
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup >
+                <h:dataTable value="#{shirtController.data.entrySet().toArray()}" var="entry" border="0" cellpadding="2" cellspacing="0" width="200" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.reportingShirtTitle_shirtSize}"/>
+                        </f:facet>
+                        <h:outputText value="#{entry.key}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.reportingShirtTitle_number}"/>
+                        </f:facet>
+                        <h:outputText value="#{entry.value}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <br />
+            <br />
+            <h:panelGroup rendered="#{shirtController.staffMembersWithoutShirt.size() > 0}">
+                <h:outputText value="Personen, welche kein T-Shirt zugewiesen haben:"/>
+                <h:dataTable value="#{shirtController.staffMembersWithoutShirt}" var="item" border="0" cellpadding="2" cellspacing="0" width="900" styleClass="jsfcrud_list" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_title}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.title}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_lastName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.lastName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_firstName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.firstName}"/>
+                    </h:column>
+                    <!--
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_street}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.street}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_zip}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.zip}"/>
+                    </h:column>
+                    -->
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_city}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.city}"/>
+                    </h:column>
+                    <!--<h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_mailAddress}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mailAddress}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_phoneNr}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.phoneNr}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_cellPhoneNr}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cellPhoneNr}"/>
+                    </h:column>
+                    -->
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStaffMemberTitle_numberOfShifts}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.shiftsSize}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:outputText value=" "/>
+                        <h:commandButton action="#{staffMemberController.detailSetup}" value="#{bundle.ListStaffMemberViewButton}">
+                            <f:param name="jsfcrud.currentStaffMember" value="#{jsfcrud_class['org.mcguppy.eventplaner.jsf.util.JsfUtil'].jsfcrud_method['getAsConvertedString'][item][staffMemberController.converter].jsfcrud_invoke}"/>
+                        </h:commandButton>
+                        <h:outputText value=" "/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+        </ui:define>
+    </ui:composition>
+</html>
+
