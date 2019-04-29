@@ -84,7 +84,8 @@ public class StaffMemberShiftPlanC5LeftController {
 
         List<StaffMember> staffMembers = jpaController.findStaffMemberEntities();
         Collections.sort(staffMembers);
-        PdfPTable staffMemberTable = null;
+        PdfPTable addressTable = null;
+        PdfPTable contactDataTable = null;
         for (StaffMember staffMember : staffMembers) {
             if (staffMember.getShifts().isEmpty()) {
                 continue;
@@ -101,24 +102,42 @@ public class StaffMemberShiftPlanC5LeftController {
             addEmptyLine(preface, 1);
             document.add(preface);
 
-            // staffMember Data
-            staffMemberTable = new PdfPTable(new float[]{100});
-            staffMemberTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
-            staffMemberTable.addCell(new Paragraph(staffMember.getTitle().toString(), addressNormal));
-            staffMemberTable.addCell(new Paragraph((staffMember.getFirstName() + ' ' + staffMember.getLastName()), addressNormal));
-            staffMemberTable.addCell(new Paragraph(staffMember.getStreet(), addressNormal));
-            staffMemberTable.addCell(new Paragraph((staffMember.getZip() + ' ' + staffMember.getCity()), addressNormal));
+            // address Data
+            addressTable = new PdfPTable(new float[]{100});
+            addressTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+            addressTable.addCell(new Paragraph(staffMember.getTitle().toString(), addressNormal));
+            addressTable.addCell(new Paragraph((staffMember.getFirstName() + ' ' + staffMember.getLastName()), addressNormal));
+            addressTable.addCell(new Paragraph(staffMember.getStreet(), addressNormal));
+            addressTable.addCell(new Paragraph((staffMember.getZip() + ' ' + staffMember.getCity()), addressNormal));
 
-            document.add(staffMemberTable);
+            document.add(addressTable);
 
+            // contact Data
+            Paragraph contactDataSection = new Paragraph();
+            addEmptyLine(contactDataSection, 1);
+            addEmptyLine(contactDataSection, 1);
+            addEmptyLine(contactDataSection, 1);
+            addEmptyLine(contactDataSection, 1);
+            addEmptyLine(contactDataSection, 1);
+            addEmptyLine(contactDataSection, 1);
+            contactDataSection.add(new Paragraph("Kontakt-Daten:", subFont));
+            addEmptyLine(contactDataSection, 1);
+            document.add(contactDataSection);
+            
+            contactDataTable = new PdfPTable(new float[]{15, 40});
+            contactDataTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+
+            contactDataTable.addCell(new Paragraph("Mailadresse:", smallNormal));
+            contactDataTable.addCell(new Paragraph(staffMember.getMailAddress(), smallNormal));
+            contactDataTable.addCell(new Paragraph("Telefon Nummer:", smallNormal));
+            contactDataTable.addCell(new Paragraph(staffMember.getPhoneNr(), smallNormal));
+            contactDataTable.addCell(new Paragraph("Natel Nummer:", smallNormal));
+            contactDataTable.addCell(new Paragraph(staffMember.getCellPhoneNr(), smallNormal));
+            document.add(contactDataTable);
+            
+            
             // shift Data
             Paragraph shiftDataSection = new Paragraph();
-            addEmptyLine(shiftDataSection, 1);
-            addEmptyLine(shiftDataSection, 1);
-            addEmptyLine(shiftDataSection, 1);
-            addEmptyLine(shiftDataSection, 1);
-            addEmptyLine(shiftDataSection, 1);
-            addEmptyLine(shiftDataSection, 1);
             shiftDataSection.add(new Paragraph("Schicht-Daten:", subFont));
             addEmptyLine(shiftDataSection, 1);
             document.add(shiftDataSection);
